@@ -20,19 +20,16 @@ export default defineConfig({
     // 解析器
     alias: {
       // 别名, 可以在引用的时候直接用别名
-      '@': path.resolve(__dirname, 'src'),
-      '@assets': path.resolve(__dirname, 'src/assets'),
-      '@components': path.resolve(__dirname, 'src/components'),
-      '@pages': path.resolve(__dirname, 'src/pages'),
-      '@utils': path.resolve(__dirname, 'src/utils'),
-      '@styles': path.resolve(__dirname, 'src/styles'),
-      '@hooks': path.resolve(__dirname, 'src/hooks'),
-      '@store': path.resolve(__dirname, 'src/store')
+      '@': path.resolve(__dirname, 'src')
     }
   },
   css: {
     preprocessorOptions: {
       less: {
+        modifyVars: {
+          // 此处也可设置直角、边框色、字体大小等
+          'primary-color': '#57d2e2'
+        },
         javascriptEnabled: true // 允许 less (或改为sass)使用 javascript,
       }
     }
