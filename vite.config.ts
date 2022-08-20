@@ -28,7 +28,7 @@ export default defineConfig({
       less: {
         modifyVars: {
           // 此处也可设置直角、边框色、字体大小等
-          'primary-color': '#57d2e2'
+          'primary-color': 'rgb(49 191 210)'
         },
         javascriptEnabled: true // 允许 less (或改为sass)使用 javascript,
       }

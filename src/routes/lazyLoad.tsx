@@ -14,9 +14,10 @@ const lazyLoad = (Comp: React.LazyExoticComponent<any>): React.ReactNode => {
           size="large"
           style={{
             display: 'flex',
-            alignItems: 'center',
+            // alignItems: 'center',
             justifyContent: 'center',
-            height: '100%'
+            // height: '100%',
+            marginTop: '20%'
           }}
         />
       }
