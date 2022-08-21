@@ -1,5 +1,5 @@
 import * as React from 'react';
 const ArchivePage: React.FC = () => {
-  return <div>ArticlePage</div>;
+  return <div>ArchivePage</div>;
 };
 export default ArchivePage;

@@ -18,6 +18,17 @@ class ArticleService {
     });
   }
 
+  // 文章点赞加1
+  like(id: number) {
+    return request<number, any>({
+      url: `${Paths.Article}/${id}/like`,
+      method: Methods.PATCH,
+      interceptors: {
+        responseInterceptor: res => res
+      }
+    });
+  }
+
   // 根据id删除文章
   remove(id: number) {
     return request<string, Article>({

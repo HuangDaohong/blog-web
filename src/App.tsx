@@ -3,6 +3,7 @@ import styles from '@/App.module.less';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { rc, RouteKey } from '@/routes';
 import AwesomeLayout from '@/layouts';
+import ArticlePage from '@/pages/Article';
 
 const App: React.FC = () => {
   return (
@@ -16,9 +17,10 @@ const App: React.FC = () => {
             <Route path={rc(RouteKey.About).path} element={rc(RouteKey.About).element} />
             <Route path={rc(RouteKey.Friends).path} element={rc(RouteKey.Friends).element} />
             <Route path={rc(RouteKey.Messages).path} element={rc(RouteKey.Messages).element} />
-            <Route path={`${rc(RouteKey.Article).path}/*`} element={rc(RouteKey.Article).element} />
-            <Route path={rc(RouteKey.NotFound).path} element={rc(RouteKey.NotFound).element} />
+            {/* <Route path={`${rc(RouteKey.Article).path}/*`} element={rc(RouteKey.Article).element} /> */}
+            <Route path={`${rc(RouteKey.Article).path}/*`} element={<ArticlePage />} />
           </Route>
+          <Route path={rc(RouteKey.NotFound).path} element={rc(RouteKey.NotFound).element} />
         </Routes>
       </BrowserRouter>
     </div>

@@ -1,12 +1,14 @@
 import * as React from 'react';
 import * as Icon from '@ant-design/icons';
 import lazyLoad from './lazyLoad';
+
 export enum RouteKey {
   Home, //首页
   Article, //文章
   ArticleArchives, //归档
   ArticleCategories, //分类
   ArticleTags, //标签
+  ArticleView, //文章详情
   Talks, //说说
   Messages, //留言
   Friends, //友链
@@ -44,21 +46,29 @@ export const routeMap: ReadonlyMap<RouteKey, RouteConfig> = new Map(
       element: lazyLoad(React.lazy(() => import('@/pages/Article/Archive'))),
       name: '归档',
       path: '/article/archives',
+      subPath: 'archives',
       icon: <Icon.FileDoneOutlined />
     },
     {
       key: RouteKey.ArticleCategories,
       element: lazyLoad(React.lazy(() => import('@/pages/Article/Category'))),
       name: '分类',
-      path: '/article/categories',
-      subPath: 'categories'
+      path: '/article/categories/*',
+      subPath: 'categories/*'
     },
     {
       key: RouteKey.ArticleTags,
       element: lazyLoad(React.lazy(() => import('@/pages/Article/Tag'))),
       name: '标签',
-      path: '/article/tags',
-      subPath: 'tags'
+      path: '/article/tags/*',
+      subPath: 'tags/*'
+    },
+    {
+      key: RouteKey.ArticleView,
+      element: lazyLoad(React.lazy(() => import('@/pages/Article/View'))),
+      name: '详情',
+      path: '/article/view/:id',
+      subPath: 'view/:id'
     },
     {
       key: RouteKey.Talks,
