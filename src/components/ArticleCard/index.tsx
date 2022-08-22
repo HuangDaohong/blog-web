@@ -50,7 +50,7 @@ const ArticleCard: React.FC<{ article: Article }> = ({ article }) => {
           <Divider type="vertical" />
           <Icon.TagOutlined />
           &nbsp;
-          {tb_tags.map(tag => {
+          {tb_tags.map((tag, index) => {
             return (
               <span
                 key={tag.id}
@@ -58,8 +58,8 @@ const ArticleCard: React.FC<{ article: Article }> = ({ article }) => {
                 className={styles.tag}
                 onClick={() => navigate(`/article/tags/${tag?.id}`)}
               >
-                {tag.name} &nbsp;
-                {/* <Divider type="vertical" /> */}
+                {tag.name}
+                {index < tb_tags.length - 1 ? <Divider type="vertical" /> : ''}
               </span>
             );
           })}

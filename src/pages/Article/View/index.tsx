@@ -47,6 +47,8 @@ const ArticleView: React.FC = () => {
         setViews(data.views);
         setLikes(data.likes);
         setComments(data.comments);
+        // TODO useRequest
+        await mainApi.articleService.recommend({ counts: 4 });
       })();
     }
   }, []);
@@ -68,7 +70,7 @@ const ArticleView: React.FC = () => {
               &emsp;
               <Icon.TagOutlined />
               &nbsp;
-              {tags.map(tag => {
+              {tags.map((tag, index) => {
                 return (
                   <span
                     key={tag.id}
@@ -76,7 +78,8 @@ const ArticleView: React.FC = () => {
                     className={styles.tagAndCategory}
                     onClick={() => navigate(`/article/tags/${tag?.id}`)}
                   >
-                    {tag.name}&emsp;
+                    {tag.name}
+                    {index < tags.length - 1 ? <Divider type="vertical" /> : ''}
                   </span>
                 );
               })}

@@ -85,7 +85,7 @@ const ContentCom: React.FC = () => {
             //   {item.title}
             //   {item.subtitle}
             // </div>
-            <ArticleCard key={item.id} article={item} />
+            <ArticleCard key={item.article_id} article={item} />
           ))}
         </div>
       )}

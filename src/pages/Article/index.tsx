@@ -11,6 +11,7 @@ const ArticlePage: React.FC = () => {
       <Route path={rc(RouteKey.ArticleCategories).subPath} element={rc(RouteKey.ArticleCategories).element} />
       <Route path={rc(RouteKey.ArticleTags).subPath} element={rc(RouteKey.ArticleTags).element} />
       <Route path={rc(RouteKey.ArticleView).subPath} element={rc(RouteKey.ArticleView).element} />
+      <Route path={rc(RouteKey.NotFound).path} element={rc(RouteKey.NotFound).element} />
     </Routes>
   );
 };

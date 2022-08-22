@@ -9,7 +9,7 @@ import { Methods, Paths } from '@/enums';
 class ArticleService {
   findAll(data: Record<string, string | number> = {}) {
     return request<Record<string, string | number>, List<Article>>({
-      url: Paths.Article,
+      url: `${Paths.Article}/web/all`,
       method: Methods.GET,
       data,
       interceptors: {
@@ -23,6 +23,18 @@ class ArticleService {
     return request<number, any>({
       url: `${Paths.Article}/${id}/like`,
       method: Methods.PATCH,
+      interceptors: {
+        responseInterceptor: res => res
+      }
+    });
+  }
+
+  // 随机获取推荐文章列表
+  recommend(data: Record<string, number> = {}) {
+    return request<Record<string, number>, List<Article>>({
+      url: `${Paths.Article}/web/recommend`,
+      method: Methods.GET,
+      data,
       interceptors: {
         responseInterceptor: res => res
       }
