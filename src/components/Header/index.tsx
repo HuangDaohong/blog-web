@@ -1,6 +1,7 @@
 import * as React from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Menu, Affix, Input, Tooltip } from 'antd';
+import { useNavigate, useLocation } from 'react-router-dom';
+import { Menu, Affix, Input } from 'antd';
+
 import * as Icon from '@ant-design/icons';
 import SvgIcon from '@/utils/SvgIcon';
 import { menuItems } from './menuItems';
@@ -11,6 +12,8 @@ import { keywordState } from '@/store/index';
 
 const AwesomeHeader: React.FC = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+
   const [keyword, setKeyword] = useRecoilState(keywordState);
   const onSearch = (value: string) => {
     if (value.length <= 20) {
@@ -36,7 +39,7 @@ const AwesomeHeader: React.FC = () => {
       <div className={styles.container}>
         <div className={styles.logo} onClick={() => navigate('/')}>
           <SvgIcon symbolId="logo" width="50px" height="50px" />
-          <span className={styles.logo_title}>Huang Blog</span>
+          <span className={styles.logo_title}>Huang&nbsp;Blog</span>
         </div>
         <div className={styles.search}>
           <Input.Search
@@ -50,7 +53,13 @@ const AwesomeHeader: React.FC = () => {
           />
         </div>
         <div className={styles.menubox}>
-          <Menu mode="horizontal" items={menuItems} onClick={e => navigate(e.key)} className={styles.menu} />
+          <Menu
+            mode="horizontal"
+            items={menuItems}
+            selectedKeys={[location.pathname]}
+            onClick={e => navigate(e.key)}
+            className={styles.menu}
+          />
         </div>
         <div className={styles.right}>
           {/* <Tooltip title="大屏展示">
@@ -66,25 +75,19 @@ const AwesomeHeader: React.FC = () => {
             </div>
           </Tooltip> */}
 
-          <Tooltip title="博客前台">
-            <div className={styles.link}>
-              <a href="http://127.0.0.1:4000/dashboard" target="_blank" rel="noreferrer">
-                <Icon.HomeOutlined />
-              </a>
-            </div>
-          </Tooltip>
-          <Tooltip title="源码">
-            <div className={styles.github}>
-              <a href="https://github.com/HuangDaohong/blog-web-admin" target="_blank" rel="noreferrer">
-                <Icon.GithubOutlined />
-              </a>
-            </div>
-          </Tooltip>
-          <Tooltip title="全屏">
-            <div onClick={toggleFullScreen} className={styles.fullscreen}>
-              <Icon.ExpandOutlined />
-            </div>
-          </Tooltip>
+          <div className={styles.link}>
+            <a href="http://127.0.0.1:4000/dashboard" target="_blank" rel="noreferrer">
+              <Icon.HomeOutlined />
+            </a>
+          </div>
+          <div className={styles.github}>
+            <a href="https://github.com/HuangDaohong/blog-web-admin" target="_blank" rel="noreferrer">
+              <Icon.GithubOutlined />
+            </a>
+          </div>
+          <div onClick={toggleFullScreen} className={styles.fullscreen}>
+            <Icon.ExpandOutlined />
+          </div>
 
           <SvgIcon symbolId="cat" width="50px" height="50px" className={styles.user} />
         </div>

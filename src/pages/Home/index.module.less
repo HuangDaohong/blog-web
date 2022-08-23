@@ -9,7 +9,100 @@
     /*   border: 2px solid rgb(49 191 210); */
   }
   .right {
+    display: flex;
+    flex-direction: column;
     width: 25%;
-    border: 1px solid rgb(219 206 206);
+    padding: 57px 10px 10px;
+    .card_web {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      height: auto;
+      padding-top: 20px;
+      border-radius: 10px;
+      box-shadow: 2px 3px 10px 2px rgb(75 158 111 / 20%);
+      &:hover {
+        box-shadow: 2px 3px 10px 2px rgb(75 158 111 / 40%);
+      }
+      .avatar {
+        transition: all 1.2s;
+      }
+      .avatar:hover {
+        transform: rotate(360deg);
+      }
+      .web_title {
+        margin-top: 10px;
+        font-family: 'Courier New', Courier, monospace;
+        font-size: 25px;
+        font-weight: bold;
+        color: rgb(49 191 210);
+      }
+      .web_sentence {
+        font-family: KAITI;
+        font-size: 15px;
+        color: #565252;
+      }
+      .webcountinfo {
+        margin: 15px 0;
+        font-family: KaiTi;
+        font-size: 17px;
+      }
+      .webcountinfoname {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        width: 200px;
+        .webcountinfoname_value {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          font-family: KaiTi;
+          font-size: 17px;
+          color: rgb(49 191 210);
+          cursor: pointer;
+          &:hover {
+            background-color: #eff2f5;
+            border-radius: 5px;
+          }
+          .webcountinfoname_value_title {
+            color: #999999;
+          }
+        }
+      }
+    }
+    .card_notice {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px 0;
+      margin-top: 20px;
+      color: #817d7d;
+      border-radius: 10px;
+      box-shadow: 2px 3px 10px 2px rgb(75 158 111 / 20%);
+      &:hover {
+        box-shadow: 2px 3px 10px 2px rgb(75 158 111 / 40%);
+
+        /*         transform: scale(1.01); */
+      }
+    }
+    .card_tags {
+      margin: 20px 0;
+      border-radius: 10px;
+      box-shadow: 2px 3px 10px 2px rgb(75 158 111 / 20%);
+      &:hover {
+        box-shadow: 2px 3px 10px 2px rgb(75 158 111 / 40%);
+      }
+    }
+    .card_others {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px 0;
+      color: #909090;
+      cursor: pointer;
+      a {
+        color: #909090;
+      }
+    }
   }
 }

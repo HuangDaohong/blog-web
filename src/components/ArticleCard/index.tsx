@@ -29,7 +29,7 @@ const ArticleCard: React.FC<{ article: Article }> = ({ article }) => {
   };
   const doLike = async () => {
     if (!like) {
-      await articleService.like(article.id);
+      await articleService.like(article.article_id);
     }
     setLike(true);
   };
@@ -43,7 +43,7 @@ const ArticleCard: React.FC<{ article: Article }> = ({ article }) => {
           <Divider type="vertical" />
           <span
             className={styles.category}
-            onClick={() => navigate(`/article/categories/${categoryInfo.id}`)}
+            onClick={() => navigate(`/article/categories?id=${categoryInfo.id}`)}
           >
             {categoryInfo.name}
           </span>
@@ -56,7 +56,7 @@ const ArticleCard: React.FC<{ article: Article }> = ({ article }) => {
                 key={tag.id}
                 style={{ color: `${tag.color}` }}
                 className={styles.tag}
-                onClick={() => navigate(`/article/tags/${tag?.id}`)}
+                onClick={() => navigate(`/article/tags?id=${tag?.id}`)}
               >
                 {tag.name}
                 {index < tb_tags.length - 1 ? <Divider type="vertical" /> : ''}
@@ -93,9 +93,11 @@ const ArticleCard: React.FC<{ article: Article }> = ({ article }) => {
             </span>
           </div>
         </div>
-        <div className={styles.article_cover} onClick={onPost}>
-          {cover ? <img src={cover || categoryInfo.background} alt="cover" width="120" height="80" /> : ' '}
-        </div>
+        {cover ? (
+          <div className={styles.article_cover} onClick={onPost}>
+            {<img src={cover || categoryInfo.background} alt="cover" width="120" height="80" />}
+          </div>
+        ) : null}
       </div>
     </div>
   );

@@ -94,6 +94,7 @@ export type SiteData = {
   categoryCount: number;
   commentCount: number;
   tagCount: number;
+  articleClickCount: number;
   // friendCount: number;
 };
 type WebLog = BaseType & {

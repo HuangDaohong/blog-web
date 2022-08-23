@@ -1,2 +1,5 @@
 import articleService from './article';
-export { articleService };
+import configService from './config';
+import tagService from './tag';
+import friendService from './friend';
+export { articleService, configService, tagService, friendService };

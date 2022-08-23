@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useInfiniteScroll } from 'ahooks';
-import { Skeleton, message, Divider, Spin } from 'antd';
+import { Skeleton, Divider, Spin, Tabs } from 'antd';
 import * as mainApi from '@/api';
 import { Article } from '@/types';
 import { useRecoilValue } from 'recoil';
@@ -16,9 +16,17 @@ interface Result {
 const ContentCom: React.FC = () => {
   const ref = React.useRef<HTMLDivElement>(null);
   let keyword = useRecoilValue(getkeywordState);
+  // const [orderKey, setOrderKey] = useSafeState<string>('createdAt');
+  const orderKeyRef = React.useRef('createdAt');
+
   keyword = keyword || null;
   const getLoadMoreList = async (pageNum: number, pageSize: number): Promise<Result> => {
-    const data = await mainApi.articleService.findAll({ pageNum, pageSize, keyword: keyword });
+    const data = await mainApi.articleService.findAll({
+      pageNum,
+      pageSize,
+      orderKey: orderKeyRef.current,
+      keyword: keyword
+    });
     // const nId = data.data.list.length < data.data.total ? 1 : undefined;
     return new Promise(resolve => {
       setTimeout(() => {
@@ -32,9 +40,9 @@ const ContentCom: React.FC = () => {
     });
   };
 
-  const PAGE_SIZE = 8;
+  const PAGE_SIZE = 7;
 
-  const { data, loading, loadMore } = useInfiniteScroll(
+  const { data, loading, loadMore, reload, loadingMore } = useInfiniteScroll(
     data => {
       const pageNum = data ? Math.ceil(data.list.length / PAGE_SIZE) + 1 : 1;
       return getLoadMoreList(pageNum, PAGE_SIZE);
@@ -42,18 +50,15 @@ const ContentCom: React.FC = () => {
     {
       // threshold: 0,
       // target: ref,
-      manual: true,
+      manual: true, // 手动触发
       // 要加上下面这句，不然重复加载，我也不知道为啥。但依然有一次请求加载两次的现象
-      isNoMore: data => data?.total <= data?.pageNum * PAGE_SIZE,
-      onError: () => {
-        message.error('网络错误，加载失败哦');
-      }
+      isNoMore: data => data?.total <= data?.pageNum * PAGE_SIZE
     }
   );
   const hasMore = data && data.list.length < data.total;
 
   const scrollChange = () => {
-    // console.log('clientHeight:', document.documentElement.scrollTop);
+    // console.log('scrollTop:', document.documentElement.scrollTop);
     // console.log('clientHeight:', document.documentElement.clientHeight);
     // console.log('scrollHeight:', document.documentElement.scrollHeight);
     const el = getTargetElement(ref);
@@ -61,12 +66,20 @@ const ContentCom: React.FC = () => {
       return;
     }
     if (
-      Math.floor(document.documentElement.scrollTop) + Math.floor(document.documentElement.clientHeight) ===
+      Math.floor(document.documentElement.scrollTop + 0.5) +
+        Math.floor(document.documentElement.clientHeight) ==
       Math.floor(document.documentElement.scrollHeight)
     ) {
       loadMore();
     }
   };
+
+  const onChange = (key: string) => {
+    console.log(key);
+    orderKeyRef.current = key;
+    reload();
+  };
+
   React.useEffect(() => {
     window.addEventListener('scroll', scrollChange, true);
     scrollChange();
@@ -76,6 +89,12 @@ const ContentCom: React.FC = () => {
   }, []);
   return (
     <div ref={ref} style={{ height: '100%', overflow: 'auto', padding: 12 }}>
+      <Tabs defaultActiveKey="createdAt" onChange={onChange}>
+        <Tabs.TabPane tab="最新" key="createdAt"></Tabs.TabPane>
+        <Tabs.TabPane tab="最热" key="views"></Tabs.TabPane>
+        <Tabs.TabPane tab="最赞" key="likes"></Tabs.TabPane>
+        <Tabs.TabPane tab="推荐" key="recommend"></Tabs.TabPane>x
+      </Tabs>
       {loading ? (
         <Skeleton active />
       ) : (
@@ -90,21 +109,42 @@ const ContentCom: React.FC = () => {
         </div>
       )}
 
-      <div style={{ marginTop: 8 }}>
+      <div style={{ marginTop: 10 }}>
+        {/* {hasMore && (<Button onClick={loadMore} disabled={loadingMore}>{loadingMore ? 'Loading more...' : 'Click to load more'}</Button>)} */}
+        {/* {hasMore && <div onClick={loadMore}>{loadingMore ? <Spin size="large" /> : '加载更多...'}</div>} */}
         {/* {hasMore && (
-          <Button onClick={loadMore} disabled={loadingMore}>
-            {loadingMore ? 'Loading more...' : 'Click to load more'}
-          </Button>
+          <span
+            onClick={loadMore}
+            style={{ cursor: 'pointer', textAlign: 'center', backgroundColor: 'white', fontSize: '15px' }}
+          >
+            加载更多...
+          </span>
         )} */}
-        {/* {hasMore && <h1 onClick={loadMore}>{loadingMore ? <Spin size="large" /> : 'Click to load more'}</h1>} */}
-        {hasMore && (
-          <div style={{ textAlign: 'center', marginTop: 12 }}>
-            {/* <Skeleton active /> */}
+        {hasMore && loadingMore && (
+          <div style={{ textAlign: 'center', margin: '20px 0' }}>
+            <div
+              onClick={loadMore}
+              style={{
+                cursor: 'pointer',
+                display: 'flex',
+                margin: '5px 300px',
+                justifyContent: 'center',
+                fontSize: '14px',
+                lineHeight: '30px',
+                backgroundColor: '#57d2e2',
+                borderRadius: '5px',
+                opacity: 0.8
+              }}
+            >
+              加载更多...
+            </div>
             <Spin size="large" />
           </div>
         )}
-        {data?.list?.length === 0 && <div>不好意思😏,看看别的文章吧</div>}
-        {hasMore !== undefined && !hasMore && <Divider>🙈~🙈</Divider>}
+        {data?.list?.length === 0 && (
+          <div style={{ fontSize: '30px', textAlign: 'center' }}>😅😅😅😅 没找到，换个词呢🍉🍉</div>
+        )}
+        {hasMore !== undefined && !hasMore && !loading && <Divider>🙈END🙈</Divider>}
       </div>
     </div>
   );

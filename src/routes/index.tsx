@@ -53,15 +53,15 @@ export const routeMap: ReadonlyMap<RouteKey, RouteConfig> = new Map(
       key: RouteKey.ArticleCategories,
       element: lazyLoad(React.lazy(() => import('@/pages/Article/Category'))),
       name: '分类',
-      path: '/article/categories/*',
-      subPath: 'categories/*'
+      path: '/article/categories',
+      subPath: 'categories'
     },
     {
       key: RouteKey.ArticleTags,
       element: lazyLoad(React.lazy(() => import('@/pages/Article/Tag'))),
       name: '标签',
-      path: '/article/tags/*',
-      subPath: 'tags/*'
+      path: '/article/tags',
+      subPath: 'tags'
     },
     {
       key: RouteKey.ArticleView,

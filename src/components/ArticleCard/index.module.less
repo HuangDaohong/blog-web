@@ -3,16 +3,19 @@
   flex-direction: column;
   height: 162px;
   padding: 12px 20px;
-  margin-top: 10px;
-  background-color: white;
+  margin-bottom: 15px;
   border-radius: 10px;
+  box-shadow: 0 0 10px rgb(49 45 45 / 30%);
+  transition: all 0.3s;
   &:hover {
-    box-shadow: 2px 3px 10px 2px rgb(0 0 0 / 20%);
+    box-shadow: 2px 3px 10px 2px rgb(75 158 111 / 20%);
+
+    /*     img {
+      transform: scale(1.2);
+    } */
 
     /*  transform: scale(1.001); */
   }
-
-  transition: all 0.3s ease-in-out;
 }
 .top {
   color: #999999;
@@ -42,8 +45,10 @@
     text-overflow: ellipsis;
     white-space: nowrap;
     &:hover {
-      color: #44c5d6;
+      /*  color: #44c5d6; */
+      text-shadow: #44c5d6 0 0 10px;
       cursor: pointer;
+      transition: all 0.3s;
     }
   }
   .subtitle {
@@ -58,9 +63,19 @@
   }
 }
 .article_cover {
+  width: 100%;
   margin-top: 10px;
+  overflow: hidden;
   cursor: pointer;
   border-radius: 2px;
+  img {
+    transition: all 0.5s ease-in-out;
+  }
+  &:hover {
+    img {
+      transform: scale(1.2);
+    }
+  }
 }
 .icons {
   display: flex;

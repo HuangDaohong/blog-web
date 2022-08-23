@@ -18,12 +18,14 @@ const SvgIcon: React.FC<SvgIconProps> = props => {
       height={props.height ?? '24px'}
       onClick={props.onClick}
       aria-hidden="true"
-      style={{
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        cursor: 'pointer'
-      }}
+      style={
+        {
+          // display: 'flex',
+          // justifyContent: 'center',
+          // alignItems: 'center',
+          // cursor: 'pointer'
+        }
+      }
     >
       <use xlinkHref={`#${props.prefix ?? 'icon'}-${props.symbolId}`} fill={props.color ?? '#fff'} />
     </svg>

@@ -19,8 +19,8 @@ class ArticleService {
   }
 
   // 文章点赞加1
-  like(id: number) {
-    return request<number, any>({
+  like(id: number | string) {
+    return request<string | number, any>({
       url: `${Paths.Article}/${id}/like`,
       method: Methods.PATCH,
       interceptors: {
@@ -31,7 +31,7 @@ class ArticleService {
 
   // 随机获取推荐文章列表
   recommend(data: Record<string, number> = {}) {
-    return request<Record<string, number>, List<Article>>({
+    return request<Record<string, number>, { total: number; list: Array<Article> }>({
       url: `${Paths.Article}/web/recommend`,
       method: Methods.GET,
       data,
