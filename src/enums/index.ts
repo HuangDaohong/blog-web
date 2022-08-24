@@ -36,7 +36,8 @@ export enum Paths {
   Comment = '/comment',
   Friend = '/friend',
   Wallpaper = '/wallpapers',
-  WebLog = '/weblog'
+  WebLog = '/weblog',
+  Visitor = '/viewer'
 }
 
 export enum Methods {

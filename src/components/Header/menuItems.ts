@@ -30,7 +30,7 @@ export const menuItems: ItemType[] = [
     ]
   },
 
-  // 说说
+  // 动态
   {
     key: rc(RouteKey.Talks).path,
     icon: rc(RouteKey.Talks).icon,

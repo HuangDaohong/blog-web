@@ -76,7 +76,12 @@ const ArticleView: React.FC = () => {
     const data = await res.json();
     setIpInfo(data);
     const addressInfo = await fetch(`https://ip.useragentinfo.com/json?ip=${data.ipAddress}`);
-    setAddress(await addressInfo.json());
+    const addressData = await addressInfo.json();
+    setAddress(addressData);
+    await mainApi.configService.createVisitor({
+      ip: data.ipAddress,
+      city: addressData.province + ' ' + addressData.city + ' ' + addressData.isp
+    });
   };
   React.useEffect(() => {
     getIP();
@@ -171,12 +176,11 @@ const ArticleView: React.FC = () => {
 
       <div className={styles.right}>
         <div className={styles.postinfo}>
-          <h3>欢迎点赞、留言 👋👋👋</h3>
+          <span className={styles.postinfo_title}>欢迎点赞、留言 👋👋👋</span>
           {ipInfo?.status == 'success' && address ? (
             <div>
-              {address?.province},{address?.city},{address?.isp}
               <br />
-              {ipInfo?.ipAddress}
+              {ipInfo?.ipAddress}:{address?.province},{address?.city},{address?.isp}
               <br />
               <br />
               {ipInfo?.data?.content}

@@ -20,11 +20,6 @@ const Word3: React.FC<Props> = ({ dataList }) => {
       borderWidth: 1,
       borderRadius: 10,
       backgroundColor: 'rgba(223, 236, 235, 0.8)',
-      // 提示框文字格式
-      // formatter: function (params) {
-      //   return params.name + ' : ' + params.value + '篇';
-      // },
-      // 提示框文字大小
       textStyle: {
         fontSize: 13,
         color: 'black'

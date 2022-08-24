@@ -97,6 +97,10 @@ export type SiteData = {
   articleClickCount: number;
   // friendCount: number;
 };
+type Visitor = BaseType & {
+  ip: string;
+  city: string;
+};
 type WebLog = BaseType & {
   title: string;
   content: string;
