@@ -2,11 +2,13 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import viteEslint from 'vite-plugin-eslint';
 import * as path from 'path';
+import compressPlugin from 'vite-plugin-compression';
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'; // 导入svg图标
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
     react(),
+    compressPlugin(),
     viteEslint({
       failOnError: false
     }),
@@ -35,7 +37,15 @@ export default defineConfig({
     }
   },
   server: {
-    open: true, // 服务启动时自动在浏览器中打开应用, 默认为true
-    port: 5000
+    open: true,
+    port: 5000,
+    cors: true
+    // proxy: {
+    //   '/api': {
+    //     target: 'https://172.24.29.128',
+    //     changeOrigin: true,
+    //     rewrite: path => path.replace(/^\/api/, '')
+    //   }
+    // }
   }
 });

@@ -76,12 +76,12 @@ const AwesomeHeader: React.FC = () => {
           </Tooltip> */}
 
           <div className={styles.link}>
-            <a href="http://127.0.0.1:4000/dashboard" target="_blank" rel="noreferrer">
+            <a href="http://47.100.232.11:8888/" target="_blank" rel="noreferrer">
               <Icon.HomeOutlined />
             </a>
           </div>
           <div className={styles.github}>
-            <a href="https://github.com/HuangDaohong/blog-web-admin" target="_blank" rel="noreferrer">
+            <a href="https://github.com" target="_blank" rel="noreferrer">
               <Icon.GithubOutlined />
             </a>
           </div>
