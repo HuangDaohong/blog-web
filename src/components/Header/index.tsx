@@ -76,7 +76,7 @@ const AwesomeHeader: React.FC = () => {
           </Tooltip> */}
 
           <div className={styles.link}>
-            <a href="http://47.100.232.11:8888/" target="_blank" rel="noreferrer">
+            <a href="https://hdhblog.cn/admin" target="_blank" rel="noreferrer">
               <Icon.HomeOutlined />
             </a>
           </div>

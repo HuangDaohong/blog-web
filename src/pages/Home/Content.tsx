@@ -50,7 +50,7 @@ const ContentCom: React.FC = () => {
     {
       // threshold: 0,
       // target: ref,
-      manual: true, // 手动触发
+      // manual: true, // 手动触发
       // 要加上下面这句，不然重复加载，我也不知道为啥。但依然有一次请求加载两次的现象
       isNoMore: data => data?.total <= data?.pageNum * PAGE_SIZE
     }
