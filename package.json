@@ -26,6 +26,7 @@
     "ahooks": "^3.7.0",
     "antd": "^4.22.6",
     "axios": "^0.27.2",
+    "classnames": "^2.3.1",
     "dayjs": "^1.11.5",
     "echarts": "^5.3.3",
     "echarts-for-react": "^3.0.2",

@@ -113,7 +113,6 @@ const ArticleView: React.FC = () => {
           <div className={styles.head}>
             <div className={styles.head_title}>{title}</div>
             <div className={styles.heda_ainfo}>
-              <span>发表于：{dayjs(createTime).format('YYYY-MM-DD')}&emsp;</span>
               <span
                 className={styles.tagAndCategory}
                 onClick={() => navigate(`/article/categories/${category.id}`)}
@@ -138,6 +137,8 @@ const ArticleView: React.FC = () => {
                 );
               })}
             </div>
+            <span>发表于：{dayjs(createTime).format('YYYY-MM-DD')}&emsp;</span>
+
             <div className={styles.people}>
               <span className={styles.likes} onClick={doLike}>
                 {like ? (

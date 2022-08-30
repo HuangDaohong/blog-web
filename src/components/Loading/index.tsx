@@ -1,5 +1,8 @@
 import * as React from 'react';
 import { Skeleton } from 'antd';
-const LoadingCom: React.FC = () => <Skeleton active />;
+interface Props {
+  rows?: number;
+}
+const LoadingCom: React.FC<Props> = ({ rows = 3 }) => <Skeleton active paragraph={{ rows }} />;
 
 export default LoadingCom;

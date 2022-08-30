@@ -44,6 +44,13 @@ export const menuItems: ItemType[] = [
     label: rc(RouteKey.Messages).name
   },
 
+  // 作品
+  {
+    key: rc(RouteKey.Works).path,
+    icon: rc(RouteKey.Works).icon,
+    label: rc(RouteKey.Works).name
+  },
+
   // 友链
   {
     key: rc(RouteKey.Friends).path,

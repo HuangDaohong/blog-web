@@ -26,6 +26,7 @@
     justify-content: center;
   }
   .menubox {
+    width: auto;
     padding-top: 8px;
     .menu {
       font-size: 15px;
@@ -55,6 +56,39 @@
     .user {
       margin: 0 16px;
       cursor: pointer;
+    }
+  }
+}
+.mobileNavBtn {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 999;
+  display: none;
+  width: 50px;
+  margin: 0 auto;
+  font-size: 20px;
+  line-height: 60px;
+  text-align: center;
+}
+
+@media screen and (max-width: 1240px) {
+  .search,
+  .menubox,
+  .right {
+    display: none !important;
+  }
+  .mobileNavBtn {
+    display: block;
+  }
+  .links {
+    display: flex;
+    padding: 10%;
+    a {
+      width: 50%;
+      font-size: 17px;
+      color: #000000;
+      text-align: center;
     }
   }
 }

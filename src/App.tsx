@@ -17,6 +17,7 @@ const App: React.FC = () => {
             <Route path={rc(RouteKey.About).path} element={rc(RouteKey.About).element} />
             <Route path={rc(RouteKey.Friends).path} element={rc(RouteKey.Friends).element} />
             <Route path={rc(RouteKey.Messages).path} element={rc(RouteKey.Messages).element} />
+            <Route path={rc(RouteKey.Works).path} element={rc(RouteKey.Works).element} />
             {/* <Route path={`${rc(RouteKey.Article).path}/*`} element={rc(RouteKey.Article).element} /> */}
             <Route path={`${rc(RouteKey.Article).path}/*`} element={<ArticlePage />} />
             <Route path={rc(RouteKey.NotFound).path} element={rc(RouteKey.NotFound).element} />

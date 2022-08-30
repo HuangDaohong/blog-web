@@ -1,36 +1,31 @@
 import * as React from 'react';
 import * as mainApi from '@/api';
-import type { Friend } from '@/types';
+import { useRequest } from 'ahooks';
+import { Title } from '@/enums';
 import { shuffleArray } from '@/utils/randomArray';
+import PageLayoutComp from '@/components/PageLayout';
 import styles from './index.module.less';
+
 const FriendsPage: React.FC = () => {
-  const [friends, setFriends] = React.useState<Friend[]>([]);
-  const fetchdata = async () => {
-    const { data } = await mainApi.friendService.findAll();
-    setFriends(data?.rows);
-  };
-  React.useEffect(() => {
-    fetchdata();
-  }, []);
+  const { data, loading } = useRequest(mainApi.friendService.findAll, {
+    retryCount: 3
+  });
   return (
-    <>
-      <div className={styles.title}>
-        <span>友情链接</span>
-      </div>
+    <PageLayoutComp title={Title.Friends} loading={loading} rows={10}>
       <div className={styles.box}>
-        {shuffleArray(friends).map(friend => (
+        {shuffleArray(data?.data?.rows).map(friend => (
           <div key={friend.id} className={styles.item}>
             <a href={friend.url} rel="noreferrer" target="_blank" className={styles.link}>
-              <img src={friend.logo} alt="" className={styles.left} />
+              <img src={friend.logo} alt="" className={styles.leftlogo} />
               <div className={styles.right}>
                 <div className={styles.name}>{friend.name}</div>
-                {/* <div className={styles.desc}>{friend.description}</div> */}
+                <div className={styles.desc}>{friend.description}</div>
               </div>
             </a>
           </div>
         ))}
       </div>
-    </>
+    </PageLayoutComp>
   );
 };
 export default FriendsPage;

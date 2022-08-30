@@ -1,0 +1,39 @@
+.compstyle {
+  padding: 20px 100px;
+}
+.itemtime {
+  padding: 0 10px 10px 0;
+  font-size: 20px;
+  font-weight: bold;
+}
+.itembox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+  padding: 20px 10px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgb(0 0 0 / 50%);
+  transition: all 0.3s;
+  &:hover {
+    background-color: #d5e1e9;
+    transform: scale(1.05);
+  }
+  .title {
+    font-size: 20px;
+    font-weight: bold;
+  }
+  .content {
+    padding: 10px;
+    font-family: KAITI;
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 1.5;
+  }
+}
+@media screen and (max-width: 1240px) {
+  .compstyle {
+    padding: 10px 15px;
+  }
+}
