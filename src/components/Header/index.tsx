@@ -102,10 +102,22 @@ const AwesomeHeader: React.FC = () => {
         placement="left"
         onClose={() => setVisible(false)}
         visible={visible}
-        width={170}
+        width={200}
         closable={false}
       >
         <div className={styles.mobileNavBox}>
+          <div>
+            <Input.Search
+              placeholder="搜索..."
+              enterButton="Go"
+              // disabled
+              // size="large"
+              size="small"
+              allowClear
+              onSearch={onSearch}
+              style={{ marginBottom: '10px' }}
+            />
+          </div>
           <Menu
             mode="inline"
             items={menuItems}

@@ -9,6 +9,7 @@ export enum RouteKey {
   ArticleCategories, //分类
   ArticleTags, //标签
   ArticleView, //文章详情
+  ArticleList, //文章列表
   Talks, //动态
   Works, //作品
   Messages, //留言
@@ -70,6 +71,13 @@ export const routeMap: ReadonlyMap<RouteKey, RouteConfig> = new Map(
       name: '详情',
       path: '/article/view/:id',
       subPath: 'view/:id'
+    },
+    {
+      key: RouteKey.ArticleList,
+      element: lazyLoad(React.lazy(() => import('@/pages/Article/ArticleDetailList'))),
+      name: '列表',
+      path: '/article/list',
+      subPath: 'list'
     },
     {
       key: RouteKey.Talks,

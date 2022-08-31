@@ -51,7 +51,7 @@ export enum Methods {
 export enum Title {
   Talks = '动态',
   Friends = '友情链接',
-  Classes = '分类',
+  Categorys = '分类',
   Tags = '标签',
   Msg = '留言板',
   Link = '友情链接',

@@ -1,0 +1,40 @@
+.box {
+  padding: 10px;
+}
+.item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 60px;
+  padding: 10px;
+  margin-bottom: 10px;
+  color: #000000;
+  cursor: pointer;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgb(0 0 0 / 20%);
+  transition: all 0.3s;
+  &:hover {
+    background-color: #44c5d6;
+    box-shadow: 0 0 10px rgb(0 0 0 / 30%);
+    transform: translate(-8px, 0) scale(1.01);
+  }
+  .itemvalue_title {
+    height: auto;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: left;
+  }
+  .itemvalue_time {
+    min-width: 100px;
+    font-family: '黑体';
+    font-size: 16px;
+    text-align: right;
+  }
+}
+
+@media screen and (max-width: 1240px) {
+  .itemvalue_time {
+    display: none;
+  }
+}

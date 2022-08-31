@@ -18,6 +18,17 @@ class ArticleService {
     });
   }
 
+  findAllByCategoryId(data: { id: number; pageNum: number; pageSize: number }) {
+    return request<Record<string, number>, List<Article>>({
+      url: `${Paths.Article}/category/${data.id}`,
+      method: Methods.GET,
+      data,
+      interceptors: {
+        responseInterceptor: res => res
+      }
+    });
+  }
+
   // 文章点赞加1
   like(id: number | string) {
     return request<string | number, any>({

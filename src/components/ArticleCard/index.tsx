@@ -41,10 +41,7 @@ const ArticleCard: React.FC<{ article: Article }> = ({ article }) => {
           <Divider type="vertical" />
           <LocaleTime date={createdAt!} />
           <Divider type="vertical" />
-          <span
-            className={styles.category}
-            onClick={() => navigate(`/article/categories?id=${categoryInfo.id}`)}
-          >
+          <span className={styles.category} onClick={() => navigate('/article/categories')}>
             {categoryInfo.name}
           </span>
           <Divider type="vertical" />

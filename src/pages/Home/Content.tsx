@@ -36,7 +36,7 @@ const ContentCom: React.FC = () => {
           pageNum,
           pageSize
         });
-      }, 200);
+      }, 100);
     });
   };
 
@@ -120,27 +120,29 @@ const ContentCom: React.FC = () => {
             加载更多...
           </span>
         )} */}
-        {hasMore && loadingMore && (
-          <div style={{ textAlign: 'center', margin: '20px 0' }}>
+        {hasMore && (
+          <div style={{ textAlign: 'center', margin: '10px 0' }}>
             <div
               onClick={loadMore}
               style={{
                 cursor: 'pointer',
                 display: 'flex',
-                margin: '5px 300px',
+                margin: '5px auto',
+                width: '200px',
                 justifyContent: 'center',
                 fontSize: '14px',
                 lineHeight: '30px',
                 backgroundColor: '#57d2e2',
                 borderRadius: '5px',
-                opacity: 0.8
+                opacity: 0.6
               }}
             >
-              加载更多...
+              more..
             </div>
-            <Spin size="large" />
+            <Spin />
           </div>
         )}
+        {hasMore && loadingMore && <Skeleton active />}
         {data?.list?.length === 0 && (
           <div style={{ fontSize: '30px', textAlign: 'center' }}>😅😅😅😅 没找到，换个词呢🍉🍉</div>
         )}
