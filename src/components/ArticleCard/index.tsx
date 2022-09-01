@@ -53,7 +53,7 @@ const ArticleCard: React.FC<{ article: Article }> = ({ article }) => {
                 key={tag.id}
                 style={{ color: `${tag.color}` }}
                 className={styles.tag}
-                onClick={() => navigate(`/article/tags?id=${tag?.id}`)}
+                onClick={() => navigate(`/article/list?tagid=${tag?.id}&&name=${tag?.name}`)}
               >
                 {tag.name}
                 {index < tb_tags.length - 1 ? <Divider type="vertical" /> : ''}

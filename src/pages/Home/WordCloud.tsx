@@ -72,7 +72,7 @@ const Word3: React.FC<Props> = ({ dataList }) => {
   };
   return (
     <div>
-      <ReactECharts option={option || {}} style={{ height: '255px' }} onEvents={onEvents} />
+      <ReactECharts option={option || {}} style={{ width: '100%', height: '255px' }} onEvents={onEvents} />
     </div>
   );
 };

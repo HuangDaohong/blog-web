@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const Wrapper = styled.div`
   .markdown-body {
-    padding: 0 35px;
+    padding: 0 4%;
     word-break: break-word;
     line-height: 1.75;
     font-weight: 400;
@@ -257,7 +257,7 @@ export const Wrapper = styled.div`
       overflow-x: auto;
       background-color: rgba(77, 208, 225, 0.08);
       color: #26c6da;
-      //font-size: 0.9em;
+      // font-size: 0.9em;
       padding: 0.195em 0.4em;
     }
 
@@ -282,14 +282,15 @@ export const Wrapper = styled.div`
       }
 
       > code {
-        font-size: 12px;
+        font-size: 13px;
         padding: 15px 12px;
         margin: 0;
         word-break: normal;
         display: block;
         overflow-x: auto;
-        color: #333;
-        background: #f8f8f8;
+        // color: #333;
+        color:black;
+        // background: #f8f8f8;
       }
     }
 

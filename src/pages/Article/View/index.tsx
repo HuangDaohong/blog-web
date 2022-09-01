@@ -9,7 +9,7 @@ import 'markdown-navbar/dist/navbar.css';
 import { Viewer } from '@bytemd/react';
 import gfm from '@bytemd/plugin-gfm';
 import gemoji from '@bytemd/plugin-gemoji';
-import highlight from '@bytemd/plugin-highlight-ssr';
+import highlight2 from '@bytemd/plugin-highlight';
 import mediumZoom from '@bytemd/plugin-medium-zoom'; //图片预览
 import mermaid from '@bytemd/plugin-mermaid';
 import { Wrapper } from './markdown';
@@ -20,7 +20,7 @@ import * as Icon from '@ant-design/icons';
 import { Category, Tag } from '@/types';
 import dayjs from 'dayjs';
 
-const plugins = [gfm(), gemoji(), highlight({}), mediumZoom(), mermaid()];
+const plugins = [gfm(), gemoji(), highlight2(), mediumZoom(), mermaid()];
 
 const ArticleView: React.FC = () => {
   const { id } = useParams();

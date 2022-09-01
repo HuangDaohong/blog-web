@@ -6,20 +6,27 @@ import PageLayoutComp from '@/components/PageLayout';
 import { Pagination } from 'antd';
 import dayjs from 'dayjs';
 import styles from './index.module.less';
+import { Article } from '@/types';
 
 const ArticleDetailListPage: React.FC = () => {
   const pagesize = 8;
   const [params] = useSearchParams();
   const navigate = useNavigate();
+
   const categoryID = params.get('categoryid');
+  const tagID = params.get('tagid');
+  const ID = tagID || categoryID;
+  const service = tagID ? mainApi.articleService.findAllByTagId : mainApi.articleService.findAllByCategoryId;
   const [page, setPage] = useSafeState(1);
+
   // const [pagesize, setPagesize] = useSafeState(8);
+  const [articlelist, setArticlelist] = useSafeState(Array<Article>);
   const [total, setTotal] = useSafeState<number>();
   const [titleName, setTitleName] = useSafeState('文章列表');
-  const { data, loading, run } = useRequest(
+  const { loading, run } = useRequest(
     () =>
-      mainApi.articleService.findAllByCategoryId({
-        id: Number(categoryID),
+      service({
+        id: Number(ID),
         pageNum: page,
         pageSize: pagesize
       }),
@@ -28,6 +35,7 @@ const ArticleDetailListPage: React.FC = () => {
       retryCount: 3,
       onSuccess: ({ data }) => {
         setTotal(data?.total);
+        setArticlelist(data?.list);
       }
     }
   );
@@ -41,7 +49,7 @@ const ArticleDetailListPage: React.FC = () => {
   return (
     <PageLayoutComp title={`${titleName} ${total}篇`} loading={loading} rows={10}>
       <div className={styles.box}>
-        {data?.data?.list.map(article => (
+        {articlelist.map(article => (
           <div
             key={article.id}
             className={styles.item}
