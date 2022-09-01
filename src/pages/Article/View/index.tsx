@@ -113,10 +113,7 @@ const ArticleView: React.FC = () => {
           <div className={styles.head}>
             <div className={styles.head_title}>{title}</div>
             <div className={styles.heda_ainfo}>
-              <span
-                className={styles.tagAndCategory}
-                onClick={() => navigate(`/article/categories/${category.id}`)}
-              >
+              <span className={styles.tagAndCategory} onClick={() => navigate(`/article/categories`)}>
                 <Icon.FolderOpenOutlined />
                 &nbsp;{category.name}
               </span>
@@ -129,7 +126,7 @@ const ArticleView: React.FC = () => {
                     key={tag.id}
                     style={{ color: `${tag.color}` }}
                     className={styles.tagAndCategory}
-                    onClick={() => navigate(`/article/tags/${tag?.id}`)}
+                    onClick={() => navigate(`/article/list?tagid=${tag.id}&&name=${tag.name}`)}
                   >
                     {tag.name}
                     {index < tags.length - 1 ? <Divider type="vertical" /> : ''}

@@ -53,6 +53,7 @@ export enum Title {
   Friends = '友情链接',
   Categorys = '分类',
   Tags = '标签',
+  Archives = '归档',
   Msg = '留言板',
   Link = '友情链接',
   Works = '小作品',

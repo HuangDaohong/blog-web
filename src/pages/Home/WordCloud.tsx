@@ -65,9 +65,8 @@ const Word3: React.FC<Props> = ({ dataList }) => {
   };
   const onEvents = {
     click: (params: any) => {
-      console.log(params);
       // window.open('https://www.baidu.com/s?wd=' + encodeURIComponent(params.name));
-      navigate(`/article/tags?id=${params.data.id}`);
+      navigate(`/article/list?tagid=${params.data.id}&&name=${params.data.name}`);
     }
   };
   return (

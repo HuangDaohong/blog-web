@@ -4,7 +4,7 @@ import { BackTop } from 'antd';
 import styles from './index.module.less';
 const BackToTop: React.FC = () => {
   return (
-    <BackTop duration={500} visibilityHeight={600}>
+    <BackTop duration={800} visibilityHeight={800}>
       <VerticalAlignTopOutlined className={styles.backtop} />
     </BackTop>
   );

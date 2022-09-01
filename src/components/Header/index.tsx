@@ -15,6 +15,7 @@ const AwesomeHeader: React.FC = () => {
   const location = useLocation();
   const [visible, setVisible] = React.useState(false);
   const [keyword, setKeyword] = useRecoilState(keywordState);
+  const [ishidden, setIsHidden] = React.useState(false);
   const onSearch = (value: string) => {
     if (value.length <= 20) {
       setKeyword(null);
@@ -34,13 +35,36 @@ const AwesomeHeader: React.FC = () => {
     }
   };
 
+  // 添加鼠标滚动事件,滚动时隐藏导航栏
+  const handleScroll = e => {
+    if (e.wheelDelta < 0 && document.documentElement.scrollTop > 600) {
+      setIsHidden(true);
+    } else {
+      setIsHidden(false);
+    }
+  };
+  const handleScrollisTop = () => {
+    if (window.scrollY === 0) {
+      setIsHidden(false);
+    }
+  };
+
+  React.useEffect(() => {
+    window.addEventListener('mousewheel', handleScroll);
+    window.addEventListener('scroll', handleScrollisTop);
+    return () => {
+      window.removeEventListener('mousewheel', handleScroll);
+      window.removeEventListener('scroll', handleScrollisTop);
+    };
+  }, []);
+
   return (
     <>
       <Affix offsetTop={0.0001}>
-        <div className={styles.container}>
+        <div className={styles.container} style={{ transform: ishidden ? 'translate3d(0,-100%,0)' : '' }}>
           <div className={styles.logo} onClick={() => navigate('/')}>
             <SvgIcon symbolId="logo" width="50px" height="50px" />
-            <span className={styles.logo_title}>Huang&nbsp;Blog</span>
+            <span className={styles.logo_title}>Huang Blog</span>
           </div>
           <div className={styles.search}>
             <Input.Search
@@ -78,7 +102,7 @@ const AwesomeHeader: React.FC = () => {
 
             <div className={styles.link}>
               <a href="https://hdhblog.cn/admin" target="_blank" rel="noreferrer">
-                <Icon.HomeOutlined />
+                <Icon.FundProjectionScreenOutlined />
               </a>
             </div>
             <div className={styles.github}>
@@ -95,7 +119,11 @@ const AwesomeHeader: React.FC = () => {
         </div>
       </Affix>
 
-      <div className={styles.mobileNavBtn} onClick={() => setVisible(true)}>
+      <div
+        className={styles.mobileNavBtn}
+        onClick={() => setVisible(true)}
+        style={{ transform: ishidden ? 'translateY(-60px)' : '' }}
+      >
         <Icon.MenuOutlined />
       </div>
       <Drawer
