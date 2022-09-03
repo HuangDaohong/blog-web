@@ -56,7 +56,7 @@ export enum Title {
   Archives = '归档',
   Msg = '留言板',
   Link = '友情链接',
-  Works = '小作品',
+  Works = '一些作品',
   About = '关于'
 }
 

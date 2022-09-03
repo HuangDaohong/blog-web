@@ -1,8 +1,7 @@
 import { notification } from 'antd';
 import Request from './request/index';
 import type { RequestConfig } from './request/types';
-// import { getToken, logout } from '@/store/features/acountSlice';
-// import store from '@/store';
+import { getToken } from '@/redux/features/acountSlice';
 
 export interface CustomRequestConfig<T> extends RequestConfig {
   data?: T;
@@ -19,14 +18,14 @@ const request = new Request({
   timeout: 1000 * 60 * 5,
   interceptors: {
     // 请求拦截
-    // requestInterceptor: config => {
-    //   const token = getToken();
-    //   if (token) {
-    //     config.headers = config.headers || {};
-    //     config.headers['token'] = token;
-    //   }
-    //   return config;
-    // },
+    requestInterceptor: config => {
+      const token = getToken();
+      if (token) {
+        config.headers = config.headers || {};
+        config.headers['token'] = token;
+      }
+      return config;
+    },
     // 响应拦截
     responseInterceptor: response => response,
     responseInterceptorCatch: error => {

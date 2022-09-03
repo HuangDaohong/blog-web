@@ -80,6 +80,8 @@ type IComment = BaseType & {
   reply_comment_id: number;
   comment_equipment: string;
   tb_user: UserInfo;
+  children: IComment[];
+  replyComment: IComment;
 };
 
 type Friend = BaseType & {

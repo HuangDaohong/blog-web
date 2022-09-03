@@ -1,0 +1,92 @@
+@leftpadding: 55px;
+.container {
+  padding: 1%;
+  margin-bottom: 120px;
+}
+.admin {
+  padding: 1px 2px;
+  margin: 0 5px;
+  font-size: 0.8em;
+  font-weight: 700;
+  color: white;
+  background-color: #ff6699;
+  border-radius: 3px;
+}
+.father {
+  margin: 5px;
+  .content {
+    padding-left: @leftpadding;
+  }
+  .timeAndReply {
+    padding-left: @leftpadding;
+    color: #9499a0;
+  }
+}
+.child {
+  padding-left: @leftpadding;
+  margin: 5px;
+  .replyname {
+    font-weight: 600;
+    color: #62b0cd;
+  }
+  .content {
+    padding-left: 27px;
+  }
+  .childusername {
+    padding-left: 3px;
+    font-weight: 600;
+    color: #61666d;
+  }
+  .chilid_timeAndReply {
+    padding-left: 27px;
+    color: #9499a0;
+  }
+}
+.username {
+  padding-left: 7px;
+  font-size: 15px;
+  font-weight: bold;
+  color: #61666d;
+}
+.replycontent {
+  /*  display: block; */
+  width: auto;
+  word-break: normal;
+  word-wrap: break-word;
+  white-space: pre-wrap;
+}
+.commenttitle {
+  padding-left: 20px;
+  font-size: 20px;
+  font-weight: bold;
+}
+.commentEdit {
+  margin: 20px 20px 20px 25px;
+  background-image: url('@/assets/images/girl.webp');
+  background-repeat: no-repeat;
+  background-position: top right;
+  background-size: 250px auto;
+  border: 1px solid #a7a1a1;
+  .commentEditBottonm {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    border-radius: 10px;
+  }
+}
+.pageBox {
+  display: flex;
+  justify-content: center;
+}
+@media screen and (max-width: 1240px) {
+  .child {
+    padding-left: 25px;
+  }
+  .commentEdit {
+    padding-left: 0;
+    margin: 0 !important;
+    background-image: none;
+  }
+}

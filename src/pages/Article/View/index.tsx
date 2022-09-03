@@ -19,6 +19,14 @@ import styles from './index.module.less';
 import * as Icon from '@ant-design/icons';
 import { Category, Tag } from '@/types';
 import dayjs from 'dayjs';
+import CommentCom from '@/components/Comment';
+// 下面这几个表示多少多少天之前，已经封装过另外一个，就暂时不用这个
+// import 'dayjs/locale/zh-cn';
+// dayjs.locale('zh-cn');
+// import relativeTime from 'dayjs/plugin/relativeTime';
+// dayjs.extend(relativeTime);
+
+import { useTime } from '@/utils/useTime';
 
 const plugins = [gfm(), gemoji(), highlight2(), mediumZoom(), mermaid()];
 
@@ -26,6 +34,7 @@ const ArticleView: React.FC = () => {
   const { id } = useParams();
   const navigate = useNavigate();
 
+  const { timeText } = useTime();
   const [title, setTitle] = useSafeState<string>('');
   const [cover, setCover] = useSafeState<string>(''); // cover图片
   const [content, setContent] = useSafeState<string>('');
@@ -43,7 +52,7 @@ const ArticleView: React.FC = () => {
 
   // 节流模式
   const { data: recommendArticles } = useRequest(() => mainApi.articleService.recommend({ counts: 4 }));
-  const { run } = useRequest(mainApi.articleService.findOneByArticleId, {
+  const { run, loading, data } = useRequest(mainApi.articleService.findOneByArticleId, {
     manual: true,
     onSuccess: ({ data }) => {
       setTitle(data.title);
@@ -134,7 +143,10 @@ const ArticleView: React.FC = () => {
                 );
               })}
             </div>
-            <span>发表于：{dayjs(createTime).format('YYYY-MM-DD')}&emsp;</span>
+            <span>
+              发表于：{dayjs(createTime).format('YYYY-MM-DD')}&emsp;
+              {/* {dayjs(createTime).fromNow()} */} {/* 5天前 */}
+            </span>
 
             <div className={styles.people}>
               <span className={styles.likes} onClick={doLike}>
@@ -168,17 +180,19 @@ const ArticleView: React.FC = () => {
           {cover ? <div className={styles.backcover} style={{ backgroundImage: `url(${cover})` }} /> : null}
           {/* {loading ? <Spin /> : <Viewer value={content} plugins={plugins} />} */}
           <Viewer value={content} plugins={plugins} />
-          <div className={styles.endplace}>点赞+评论</div>
+          <Divider dashed style={{ padding: '0 30px' }} />
+          {/* <div className={styles.endplace}>点赞+评论</div> */}
+          <CommentCom loading={loading} articleID={data?.data?.id} />
         </Wrapper>
       </div>
 
       <div className={styles.right}>
         <div className={styles.postinfo}>
-          <span className={styles.postinfo_title}>欢迎点赞、留言 👋👋👋</span>
+          <span className={styles.postinfo_title}>{timeText},欢迎阅读!👋</span>
           {ipInfo?.status == 'success' && address ? (
             <div>
               <br />
-              {ipInfo?.ipAddress}:{address?.province},{address?.city},{address?.isp}
+              {address?.province},{address?.city},{address?.isp},{ipInfo?.ipAddress}
               <br />
               <br />
               {ipInfo?.data?.content}

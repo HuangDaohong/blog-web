@@ -5,6 +5,7 @@
   }
 }
 body {
+  min-width: 100%; /* 解决Modal 页面抖动一下 */
   padding: 0;
   margin: 0;
 
@@ -12,6 +13,9 @@ body {
   overflow-x: hidden;
   overflow-y: overlay;
   :global {
+    .ant-divider-horizontal {
+      margin: 15px 0;
+    }
     .ant-timeline-item-head {
       width: 12px;
       height: 12px;
@@ -51,7 +55,7 @@ body {
       font-weight: bold;
       line-height: 30px;
       color: #44c5d6;
-      background-color: #e7e4ee;
+      background-color: #ffffff;
       border-radius: 10px;
     }
   }
