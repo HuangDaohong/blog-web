@@ -37,6 +37,21 @@
         }
       }
     }
+    /* stylelint-disable-next-line keyframes-name-pattern */
+    @keyframes slideInFromLeft {
+      0% {
+        opacity: 0.5;
+
+        /* transform: translateX(-100%); */
+        transform: scale(0.4);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1);
+
+        /* transform: translateX(0); */
+      }
+    }
     .backcover {
       width: 820px;
       height: 350px;
@@ -45,6 +60,10 @@
       background-repeat: no-repeat;
       background-position: center;
       background-size: cover;
+
+      /* animation: slideInFromLeft 1s ease-in-out; */
+
+      animation: 0.8s ease-out 0s 1 slideInFromLeft;
 
       /*       .backcoverimg {
         width: 100%;
@@ -111,7 +130,7 @@
           line-height: 22px;
           color: #252933;
           &:hover {
-            color: #168afd;
+            color: #44c5d6;
           }
         }
         .postrecommend_item_info {

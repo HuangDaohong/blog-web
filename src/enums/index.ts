@@ -54,7 +54,7 @@ export enum Title {
   Categorys = '分类',
   Tags = '标签',
   Archives = '归档',
-  Msg = '留言板',
+  Msg = '海内存知己，天涯若比邻',
   Link = '友情链接',
   Works = '一些作品',
   About = '关于'

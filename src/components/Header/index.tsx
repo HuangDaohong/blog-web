@@ -15,7 +15,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { GetRootState } from '@/redux';
 import { logout } from '@/redux/features/acountSlice';
 import { ItemType } from 'antd/lib/menu/hooks/useItems';
-
+import { useScroll } from '@/utils/useScroll';
 const dorpdown_menuItems: ItemType[] = [
   {
     key: 'profile',
@@ -29,6 +29,8 @@ const dorpdown_menuItems: ItemType[] = [
   }
 ];
 const AwesomeHeader: React.FC = () => {
+  // 自定义hooks
+  const isAffix = useScroll();
   const navigate = useNavigate();
   const location = useLocation();
   const dispatch = useDispatch();
@@ -36,7 +38,7 @@ const AwesomeHeader: React.FC = () => {
 
   const [visible, setVisible] = React.useState(false);
   const [keyword, setKeyword] = useRecoilState(keywordState);
-  const [ishidden, setIsHidden] = React.useState(false);
+  // const [ishidden, setIsHidden] = React.useState(false);
   const [modalVisible, setModalVisible] = React.useState(false);
 
   const handleHeaderMenuClick = React.useCallback(({ key }) => {
@@ -81,40 +83,41 @@ const AwesomeHeader: React.FC = () => {
     }
   };
 
-  // 添加鼠标滚动事件,滚动时隐藏导航栏
-  const handleScroll = e => {
-    if (e.wheelDelta < 0 && document.documentElement.scrollTop > 600) {
-      setIsHidden(true);
-    } else {
-      setIsHidden(false);
-    }
-  };
-  const handleScrollisTop = () => {
-    if (window.scrollY === 0) {
-      setIsHidden(false);
-    }
-  };
+  // // 添加鼠标滚动事件,滚动时隐藏导航栏，已经改为自定义hooks
+  // const handleScroll = e => {
+  //   if (e.wheelDelta < 0 && document.documentElement.scrollTop > 600) {
+  //     setIsHidden(true);
+  //   } else {
+  //     setIsHidden(false);
+  //   }
+  // };
+  // const handleScrollisTop = () => {
+  //   if (window.scrollY === 0) {
+  //     setIsHidden(false);
+  //   }
+  // };
 
-  React.useEffect(() => {
-    window.addEventListener('mousewheel', handleScroll);
-    window.addEventListener('scroll', handleScrollisTop);
-    return () => {
-      window.removeEventListener('mousewheel', handleScroll);
-      window.removeEventListener('scroll', handleScrollisTop);
-    };
-  }, []);
+  // React.useEffect(() => {
+  //   window.addEventListener('mousewheel', handleScroll);
+  //   window.addEventListener('scroll', handleScrollisTop);
+  //   return () => {
+  //     window.removeEventListener('mousewheel', handleScroll);
+  //     window.removeEventListener('scroll', handleScrollisTop);
+  //   };
+  // }, []);
 
   return (
     <>
-      <Affix offsetTop={0.0001}>
-        <div className={styles.container} style={{ transform: ishidden ? 'translate3d(0,-100%,0)' : '' }}>
+      <Affix offsetTop={0.000000001}>
+        {/* <div className={styles.container} style={{ transform: ishidden ? 'translate3d(0,-100%,0)' : '' }}> */}
+        <div className={styles.container} style={{ transform: !isAffix ? 'translate3d(0,-100%,0)' : '' }}>
           <div className={styles.logo} onClick={() => navigate('/')}>
             <SvgIcon symbolId="logo" width="50px" height="50px" />
             <span className={styles.logo_title}>Huang Blog</span>
           </div>
           <div className={styles.search}>
             <Input.Search
-              placeholder="输入关键字..."
+              placeholder="请输入关键字..."
               enterButton="搜索"
               // disabled
               // size="large"
@@ -176,7 +179,7 @@ const AwesomeHeader: React.FC = () => {
       <div
         className={styles.mobileNavBtn}
         onClick={() => setVisible(true)}
-        style={{ transform: ishidden ? 'translateY(-60px)' : '' }}
+        style={{ transform: !isAffix ? 'translateY(-60px)' : '' }}
       >
         <Icon.MenuOutlined />
       </div>
@@ -184,7 +187,7 @@ const AwesomeHeader: React.FC = () => {
         placement="left"
         onClose={() => setVisible(false)}
         visible={visible}
-        width={200}
+        width={170}
         closable={false}
       >
         <div className={styles.mobileNavBox}>
@@ -209,6 +212,7 @@ const AwesomeHeader: React.FC = () => {
             items={menuItems}
             selectedKeys={[location.pathname]}
             onClick={e => navigate(e.key)}
+            defaultOpenKeys={['/article']}
             className={styles.menu}
           />
           <div className={styles.links}>
@@ -225,4 +229,4 @@ const AwesomeHeader: React.FC = () => {
   );
 };
 
-export default AwesomeHeader;
+export default React.memo(AwesomeHeader);

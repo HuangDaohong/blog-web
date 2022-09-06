@@ -29,7 +29,7 @@ const Word3: React.FC<Props> = ({ dataList }) => {
       {
         name: '文章数量',
         type: 'wordCloud',
-        sizeRange: [16, 35],
+        sizeRange: [10, 35],
         // 文字旋转角度范围
         rotationRange: [-90, 90],
         shape: 'circle',
@@ -71,7 +71,7 @@ const Word3: React.FC<Props> = ({ dataList }) => {
   };
   return (
     <div>
-      <ReactECharts option={option || {}} style={{ width: '100%', height: '255px' }} onEvents={onEvents} />
+      <ReactECharts option={option || {}} style={{ width: '255px', height: '255px' }} onEvents={onEvents} />
     </div>
   );
 };

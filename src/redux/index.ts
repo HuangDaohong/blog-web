@@ -21,7 +21,7 @@ const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 export default configureStore({
   reducer: persistedReducer,
-  devTools: true,
+  devTools: import.meta.env.DEV,
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({
       serializableCheck: false // https://redux-toolkit-cn.netlify.app/usage/usage-guide/

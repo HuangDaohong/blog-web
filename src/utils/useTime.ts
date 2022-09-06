@@ -17,6 +17,6 @@ export const useTime = () => {
       ? '傍晚好'
       : hour < 22
       ? '晚上好'
-      : '夜深了,休息吧';
+      : '夜里好';
   return { timeText };
 };

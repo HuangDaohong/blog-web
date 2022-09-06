@@ -13,7 +13,7 @@ interface Props {
 }
 
 const Emoji: React.FC<Props> = props => {
-  const { emojiPeople, emojiNature, emojiSymbol, emojiFood } = useEmoji();
+  const { emojiPeople, emojiNature, emojiSymbol } = useEmoji();
   const emojiData: EmojiType[] = [
     {
       emojiStr: emojiPeople,
@@ -21,15 +21,15 @@ const Emoji: React.FC<Props> = props => {
     },
     {
       emojiStr: emojiSymbol,
-      show: '👍'
+      show: '🙉'
     },
-    {
-      emojiStr: emojiFood,
-      show: '🍎'
-    },
+    // {
+    //   emojiStr: emojiFood,
+    //   show: '🍎'
+    // },
     {
       emojiStr: emojiNature,
-      show: '⚙️'
+      show: '📢'
     }
   ];
 

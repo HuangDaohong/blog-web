@@ -6,7 +6,7 @@
   margin: 0;
   background-color: white;
   opacity: 0.9;
-  transition: 0.2s;
+  transition: 0.3s;
   .logo {
     display: flex;
     align-items: center;
@@ -66,9 +66,9 @@
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 999;
+  z-index: 10;
   display: none;
-  width: 40px;
+  width: 60px;
   margin: 0 auto;
   font-size: 20px;
   line-height: 60px;
@@ -77,7 +77,10 @@
 
 @media screen and (max-width: 1240px) {
   .container {
+    display: flex;
+    justify-content: space-around;
     height: 60px;
+    padding-left: 50px;
   }
   .logo,
   .menubox,
@@ -88,6 +91,7 @@
   }
   .mobileNavBtn {
     display: block;
+    transition: 0.3s;
   }
   .links {
     display: flex;

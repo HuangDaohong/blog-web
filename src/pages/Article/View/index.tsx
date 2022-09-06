@@ -49,10 +49,11 @@ const ArticleView: React.FC = () => {
   const [address, setAddress] = useSafeState<any>();
 
   const [like, setLike] = useSafeState<boolean>(false);
+  const [articleId, setArticleId] = useSafeState<number>();
 
   // 节流模式
   const { data: recommendArticles } = useRequest(() => mainApi.articleService.recommend({ counts: 4 }));
-  const { run, loading, data } = useRequest(mainApi.articleService.findOneByArticleId, {
+  const { run, loading } = useRequest(mainApi.articleService.findOneByArticleId, {
     manual: true,
     onSuccess: ({ data }) => {
       setTitle(data.title);
@@ -64,6 +65,7 @@ const ArticleView: React.FC = () => {
       setViews(data.views);
       setLikes(data.likes);
       setComments(data.comments);
+      setArticleId(data.id);
     }
   });
 
@@ -182,7 +184,14 @@ const ArticleView: React.FC = () => {
           <Viewer value={content} plugins={plugins} />
           <Divider dashed style={{ padding: '0 30px' }} />
           {/* <div className={styles.endplace}>点赞+评论</div> */}
-          <CommentCom loading={loading} articleID={data?.data?.id} />
+          {articleId ? (
+            <CommentCom
+              loading={loading}
+              articleID={articleId}
+              ip={ipInfo?.ipAddress}
+              city={` ${address?.city},${address?.isp} `}
+            />
+          ) : null}
         </Wrapper>
       </div>
 
@@ -210,7 +219,7 @@ const ArticleView: React.FC = () => {
                   &nbsp;目录
                 </span>
                 <Divider style={{ height: '3px', margin: '5px 0 0 0' }} />
-                <MarkNav source={content} />
+                <MarkNav source={content} ordered={false} updateHashAuto={false} headingTopOffset={60} />
               </div>
             </div>
             <div className={styles.postrecommend}>

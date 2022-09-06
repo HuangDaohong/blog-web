@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Modal, Form, Input, Button, notification } from 'antd';
+import { Modal, Form, Input, Button, notification, message } from 'antd';
 import * as Icon from '@ant-design/icons';
 import { UserInfo } from '@/types';
 import * as mainApi from '@/api';
@@ -12,6 +12,9 @@ interface Props {
 const LoginModal: React.FC<Props> = props => {
   const { modalVisible, setModalVisible } = props;
   const [form] = Form.useForm();
+  const onQQLogin = () => {
+    message.success('QQ登录待开发');
+  };
   return (
     <Modal title={'登录'} visible={modalVisible} onCancel={onClickCancel} footer={null} width={400}>
       <div>
@@ -41,7 +44,7 @@ const LoginModal: React.FC<Props> = props => {
           </Form.Item>
           <Form.Item>
             <div style={{ fontSize: '20px', display: 'flex', justifyContent: 'space-evenly' }}>
-              <Icon.QqOutlined />
+              <Icon.QqOutlined onClick={onQQLogin} />
               <Icon.GithubOutlined />
             </div>
           </Form.Item>
@@ -70,4 +73,4 @@ const LoginModal: React.FC<Props> = props => {
     setModalVisible(false);
   }
 };
-export default LoginModal;
+export default React.memo(LoginModal);

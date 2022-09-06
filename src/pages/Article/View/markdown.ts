@@ -268,7 +268,7 @@ export const Wrapper = styled.div`
       line-height: 1.75;
       box-shadow: 0 0 8px rgba(110, 110, 110, 0.45);
       border-radius: 4px;
-      margin: 16px;
+      // margin: 16px;
 
       &:before {
         content: '';

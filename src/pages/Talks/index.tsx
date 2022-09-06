@@ -5,7 +5,7 @@ import { Timeline } from 'antd';
 import { useRequest } from 'ahooks';
 import PageLayoutComp from '@/components/PageLayout';
 import dayjs from 'dayjs';
-import { Image } from 'antd';
+// import { Image } from 'antd';
 import styles from './index.module.less';
 const TalksPage: React.FC = () => {
   const { data, loading } = useRequest(mainApi.webLogService.findAllWebLogs, {
@@ -22,7 +22,7 @@ const TalksPage: React.FC = () => {
                 {/* <span className={styles.title}>{webLog.title}</span> */}
                 <span className={styles.content}>{webLog.content}</span>
                 {/* <div></div> */}
-                <Image src={webLog.backImg} alt="" style={{ width: '100%', height: 'auto' }} />
+                <img src={webLog.backImg} alt="" style={{ width: '100%', height: 'auto' }} />
               </div>
             </div>
           </Timeline.Item>

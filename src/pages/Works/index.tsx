@@ -5,7 +5,7 @@ import { Title } from '@/enums';
 const WorksPage: React.FC = () => {
   return (
     <PageLayoutComp title={Title.Works} rows={10}>
-      <div className={styles.box}>暂时没有</div>
+      <div className={styles.box}>暂未开放</div>
     </PageLayoutComp>
   );
 };
