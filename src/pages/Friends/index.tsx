@@ -19,7 +19,7 @@ const FriendsPage: React.FC = () => {
           <br />
           <span>名称: Huang Blog</span>
           <br />
-          <span>链接: https://hdhblog.cn/home</span>
+          <span>链接: https://hdhblog.cn</span>
           <br />
           <span>头像: https://hdhblog.cn/assets/avatar.d568d935.jpg</span>
           <br />

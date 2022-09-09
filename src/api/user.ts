@@ -14,6 +14,38 @@ class UserService {
     });
   }
 
+  sendCode(data: { email: string }) {
+    return request<{ email: string }, UserInfo>({
+      url: `${Paths.User}/emailcode`,
+      data,
+      method: Methods.POST,
+      interceptors: {
+        responseInterceptor: res => res
+      }
+    });
+  }
+
+  register(data: any) {
+    return request<any, UserInfo>({
+      url: `${Paths.User}/register`,
+      data,
+      method: Methods.POST,
+      interceptors: {
+        responseInterceptor: res => res
+      }
+    });
+  }
+
+  getQQ(data: { id: number }) {
+    return request<{ id: number }, any>({
+      url: `${Paths.User}/getuserbyid`,
+      method: Methods.GET,
+      data,
+      interceptors: {
+        responseInterceptor: res => res
+      }
+    });
+  }
   create(data: Pick<UserInfo, 'name' | 'email' | 'password'>) {
     return request<Pick<UserInfo, 'name' | 'email' | 'password'>, UserInfo>({
       url: Paths.User,

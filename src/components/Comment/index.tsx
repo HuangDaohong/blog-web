@@ -383,7 +383,6 @@ const CommentCom: React.FC<Props> = props => {
 
   // 子评论提交
   const submit = async (parentID: number, repliID) => {
-    console.log(replyContent, props.articleID, parentID, repliID);
     await mainApi.commentService.create({
       article_id: props.articleID,
       parent_comment_id: parentID,
@@ -401,7 +400,6 @@ const CommentCom: React.FC<Props> = props => {
       message.error('评论不能为空');
       return;
     }
-    console.log(commentReply);
     await mainApi.commentService.create({
       article_id: props.articleID,
       content: commentReply,
@@ -456,7 +454,10 @@ const CommentCom: React.FC<Props> = props => {
       {commentist.map(item => (
         <div key={item.id}>
           <div className={styles.father}>
-            <Avatar src={item?.tb_user?.avatar} size={48} />
+            <Avatar
+              src={item?.tb_user?.avatar || 'https://hdhblog.cn/api/6ddb1547d629213e63f307700.gif'}
+              size={48}
+            />
             <span className={styles.username}>{item?.tb_user?.name}</span>
             {item?.tb_user?.id === 1 ? <span className={styles.admin}>作者</span> : null}
             {item?.tb_user?.id !== 1 ? (
@@ -540,7 +541,10 @@ const CommentCom: React.FC<Props> = props => {
             {item.children
               ? item.children.map(child => (
                   <div key={child.id} className={styles.child}>
-                    <Avatar src={child?.tb_user?.avatar} size={24} />
+                    <Avatar
+                      src={child?.tb_user?.avatar || 'https://hdhblog.cn/api/6ddb1547d629213e63f307700.gif'}
+                      size={24}
+                    />
                     <span className={styles.childusername}>{child?.tb_user?.name}</span>
                     {child?.tb_user?.id === 1 ? <span className={styles.admin}>作者</span> : null}
                     {child?.tb_user?.id !== 1 ? (
@@ -580,7 +584,7 @@ const CommentCom: React.FC<Props> = props => {
                               cancelText: '取消',
                               centered: true,
                               onOk: () => {
-                                removeComment(item.id!);
+                                removeComment(child.id!);
                               }
                             });
                           }}

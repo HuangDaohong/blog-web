@@ -16,6 +16,7 @@ export interface Response<T> {
 const request = new Request({
   baseURL: import.meta.env.VITE_API_URL,
   timeout: 1000 * 60 * 5,
+  withCredentials: true,
   interceptors: {
     // 请求拦截
     requestInterceptor: config => {

@@ -95,12 +95,22 @@ const ContentCom: React.FC = () => {
   // }, []);
   return (
     <div ref={ref} style={{ height: '100%', overflow: 'auto', padding: 12 }}>
-      <Tabs defaultActiveKey="createdAt" onChange={onChange}>
+      {/* <Tabs defaultActiveKey="createdAt" onChange={onChange}>
         <Tabs.TabPane tab="最新" key="createdAt"></Tabs.TabPane>
         <Tabs.TabPane tab="最热" key="views"></Tabs.TabPane>
         <Tabs.TabPane tab="最赞" key="likes"></Tabs.TabPane>
         <Tabs.TabPane tab="推荐" key="recommend"></Tabs.TabPane>x
-      </Tabs>
+      </Tabs> */}
+      <Tabs
+        defaultActiveKey="createdAt"
+        onChange={onChange}
+        items={[
+          { label: '最新', key: 'createdAt' },
+          { label: '最热', key: 'views' },
+          { label: '最赞', key: 'likes' },
+          { label: '推荐', key: 'recommend' }
+        ]}
+      />
       {loading ? (
         <Skeleton active />
       ) : (

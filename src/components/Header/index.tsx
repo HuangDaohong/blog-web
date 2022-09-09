@@ -1,21 +1,21 @@
 import * as React from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
-import { Menu, Affix, Input, Drawer, Modal, notification, Dropdown, Avatar, message } from 'antd';
-
+import { Menu, Affix, Input, Drawer, Modal, notification, Dropdown, Avatar } from 'antd';
 import * as Icon from '@ant-design/icons';
 import SvgIcon from '@/utils/SvgIcon';
 import { menuItems } from './menuItems';
-
+import { useSearchParams, useNavigate, useLocation } from 'react-router-dom';
 import styles from './index.module.less';
 import { useRecoilState } from 'recoil';
 import { keywordState } from '@/store/index';
 import LoginModal from './LoginModal';
-
+import * as mainApi from '@/api';
 import { useDispatch, useSelector } from 'react-redux';
 import { GetRootState } from '@/redux';
 import { logout } from '@/redux/features/acountSlice';
 import { ItemType } from 'antd/lib/menu/hooks/useItems';
 import { useScroll } from '@/utils/useScroll';
+import store from '@/redux';
+import { updateUserInfo } from '@/redux/features/acountSlice';
 const dorpdown_menuItems: ItemType[] = [
   {
     key: 'profile',
@@ -41,6 +41,36 @@ const AwesomeHeader: React.FC = () => {
   // const [ishidden, setIsHidden] = React.useState(false);
   const [modalVisible, setModalVisible] = React.useState(false);
 
+  //用户信息
+  const [open, setOpen] = React.useState(false);
+
+  const [params] = useSearchParams();
+  // const navigate = useNavigate();
+  const getdata = async id => {
+    const result = await mainApi.userService.getQQ({ id });
+    if (result.code === 0) {
+      result.data.token = params.get('token');
+      store.dispatch(updateUserInfo(result.data));
+      notification.success({ message: '欢迎登录', duration: 1 });
+    } else {
+      notification.error({ message: result.message, description: '请联系管理员' });
+    }
+    // navigate('/');
+    const currentUrl = localStorage.getItem('currentUrl');
+    navigate(`${currentUrl || '/'}`);
+    localStorage.removeItem('currentUrl');
+  };
+
+  React.useEffect(() => {
+    const id = params.get('qqid');
+    if (id) {
+      getdata(id);
+    }
+  }, [params]);
+
+  const hideModal = () => {
+    setOpen(false);
+  };
   const handleHeaderMenuClick = React.useCallback(({ key }) => {
     if (key === 'logout') {
       Modal.confirm({
@@ -55,8 +85,8 @@ const AwesomeHeader: React.FC = () => {
         }
       });
     } else {
-      console.log('user:', user);
-      message.warning('用户信息');
+      setOpen(true);
+      // message.warning('用户信息');
     }
   }, []);
   const headerMenu = React.useMemo(
@@ -81,6 +111,13 @@ const AwesomeHeader: React.FC = () => {
         document.exitFullscreen();
       }
     }
+  };
+
+  const qqLogin = () => {
+    console.log('pathname', location.pathname);
+    //将pathname存入localStorge
+    localStorage.setItem('currentUrl', location.pathname);
+    setModalVisible(true);
   };
 
   // // 添加鼠标滚动事件,滚动时隐藏导航栏，已经改为自定义hooks
@@ -157,17 +194,13 @@ const AwesomeHeader: React.FC = () => {
             {user.token ? (
               <Dropdown overlay={headerMenu} arrow>
                 <Avatar
-                  src={
-                    user?.avatar ||
-                    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSSXC7e3slDWP4SWI1-XaGu_LK8_o7QO6qFDA&usqp=CAU'
-                  }
+                  src={user?.avatar || 'https://hdhblog.cn/api/6ddb1547d629213e63f307700.gif'}
                   className={styles.user}
                 />
               </Dropdown>
             ) : (
-              <div className={styles.user} onClick={() => setModalVisible(true)}>
-                {/* <SvgIcon symbolId="bixing" width="40px" height="40px" /> */}
-                登录
+              <div className={styles.user} onClick={qqLogin}>
+                {/* <SvgIcon symbolId="bixing" width="40px" height="40px" /> */}登 录
               </div>
             )}
           </div>
@@ -175,6 +208,19 @@ const AwesomeHeader: React.FC = () => {
       </Affix>
 
       <LoginModal modalVisible={modalVisible} setModalVisible={setModalVisible} />
+      <Modal
+        title="用户信息"
+        open={open}
+        onOk={hideModal}
+        onCancel={hideModal}
+        okText="确认"
+        cancelText="取消"
+        width={300}
+      >
+        <h4>名字: {user?.name}</h4>
+        <h4>邮箱: {user?.email || '暂无'}</h4>
+        <h2> ...</h2>
+      </Modal>
 
       <div
         className={styles.mobileNavBtn}
@@ -183,13 +229,7 @@ const AwesomeHeader: React.FC = () => {
       >
         <Icon.MenuOutlined />
       </div>
-      <Drawer
-        placement="left"
-        onClose={() => setVisible(false)}
-        visible={visible}
-        width={170}
-        closable={false}
-      >
+      <Drawer placement="left" onClose={() => setVisible(false)} open={visible} width={170} closable={false}>
         <div className={styles.mobileNavBox}>
           {/* <div>
             <Input.Search
