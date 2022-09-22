@@ -201,7 +201,8 @@ const ArticleView: React.FC = () => {
           {ipInfo?.status == 'success' && address ? (
             <div>
               <br />
-              {address?.province},{address?.city},{address?.isp},{ipInfo?.ipAddress}
+              From {address?.province},{address?.city},{address?.isp}
+              {/* ,{ipInfo?.ipAddress} */}
               <br />
               <br />
               {ipInfo?.data?.content}

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="2048" height="1010" preserveAspectRatio="xMidYMid" viewBox="0 0 2048 1010" style="z-index:1;margin-right:-2px;display:block;background-repeat-y:initial;background-repeat-x:initial;background-color:rgb(255, 255, 255);animation-play-state:paused" ><g transform="translate(1024,505) scale(1,1) translate(-1024,-505)" style="transform:matrix(1, 0, 0, 1, 0, 0);animation-play-state:paused" ><defs style="animation-play-state:paused" ><linearGradient id="lg-0" x1="0" x2="1" y1="0" y2="0" style="animation-play-state:paused" ><stop stop-color="#e15c64" offset="0.25" style="animation-play-state:paused" ></stop>
+
+  
+<stop stop-color="#f7b26a" offset="0.75" style="animation-play-state:paused" ></stop></linearGradient></defs>
+
+
+<path d="M 0 -151.5 C 310 151.5 1738 -454.5 2048 -151.5 L 2048 373.7 C 2762 70.7 -714 676.7 0 373.7 Z" fill="url(#lg-0)" stroke="none" style="animation-play-state:paused" ></path>
+<defs style="animation-play-state:paused" ><linearGradient id="lg-1" x1="0" x2="1" y1="0" y2="0" style="animation-play-state:paused" ><stop stop-color="#f3ed9d" offset="0.25" style="animation-play-state:paused" ></stop>
+
+  
+<stop stop-color="#f7b26a" offset="0.75" style="animation-play-state:paused" ></stop></linearGradient></defs>
+
+
+<path d="M 0 111.1 C 589.219 414.1 1458.78 -191.9 2048 111.1 L 2048 636.3 C 2482.78 333.3 -434.781 939.3 0 636.3 Z" fill="url(#lg-1)" stroke="none" style="animation-play-state:paused" ></path>
+<defs style="animation-play-state:paused" ><linearGradient id="lg-2" x1="0" x2="1" y1="0" y2="0" style="animation-play-state:paused" ><stop stop-color="#f3ed9d" offset="0.25" style="animation-play-state:paused" ></stop>
+
+  
+<stop stop-color="#a4bd81" offset="0.75" style="animation-play-state:paused" ></stop></linearGradient></defs>
+
+
+<path d="M 0 373.7 C 687.944 676.7 1360.06 70.7 2048 373.7 L 2048 898.9 C 2384.06 595.9 -336.056 1201.9 0 898.9 Z" fill="url(#lg-2)" stroke="none" style="animation-play-state:paused" ></path>
+<defs style="animation-play-state:paused" ><linearGradient id="lg-3" x1="0" x2="1" y1="0" y2="0" style="animation-play-state:paused" ><stop stop-color="#a0d7d2" offset="0.25" style="animation-play-state:paused" ></stop>
+
+  
+<stop stop-color="#a4bd81" offset="0.75" style="animation-play-state:paused" ></stop></linearGradient></defs>
+
+
+<path d="M 0 636.3 C 336.056 939.3 1711.94 333.3 2048 636.3 L 2048 1161.5 C 2735.94 858.5 -687.944 1464.5 0 1161.5 Z" fill="url(#lg-3)" stroke="none" style="animation-play-state:paused" ></path>
+<defs style="animation-play-state:paused" ><linearGradient id="lg-4" x1="0" x2="1" y1="0" y2="0" style="animation-play-state:paused" ><stop stop-color="#a0d7d2" offset="0.25" style="animation-play-state:paused" ></stop>
+
+  
+<stop stop-color="#8db1da" offset="0.75" style="animation-play-state:paused" ></stop></linearGradient></defs>
+
+
+<path d="M 0 898.9 C 434.781 1201.9 1613.22 595.9 2048 898.9 L 2048 1424.1 C 2637.22 1121.1 -589.219 1727.1 0 1424.1 Z" fill="url(#lg-4)" stroke="none" style="animation-play-state:paused" ></path></g></svg>

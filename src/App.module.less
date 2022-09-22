@@ -8,13 +8,16 @@ body {
   min-width: 100%; /* 解决Modal 页面抖动一下 */
   padding: 0;
   margin: 0;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 
   /* 隐藏x轴导航条 */
   overflow-x: hidden;
   overflow-y: overlay;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   :global {
+    .ant-timeline.ant-timeline-alternate .ant-timeline-item-right ._itembox_17nus_9 {
+      text-align: left;
+    }
     .markdown-navigation .title-anchor.active {
       color: #44c5d6;
     }
@@ -57,11 +60,11 @@ body {
       width: 30px;
       height: 30px;
       font-size: 16px;
-      font-weight: bold;
+      font-weight: 700;
       line-height: 30px;
       color: #44c5d6;
-      background-color: #ffffff;
-      border-radius: 10px;
+      background-color: rgb(0 0 0 / 0%);
+      border-radius: 50%;
     }
   }
 }

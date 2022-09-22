@@ -7,8 +7,8 @@ export function useText(el: React.RefObject<Element>, options: TypedOptions) {
   const defaultOptions: TypedOptions = {
     typeSpeed: 300,
     backSpeed: 100,
-    cursorChar: ''
-    // loop: true
+    cursorChar: '|',
+    loop: true
   };
 
   useEffect(() => {

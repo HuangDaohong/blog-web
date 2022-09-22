@@ -67,7 +67,9 @@ const ArticleCard: React.FC<{ article: Article }> = ({ article }) => {
           <div className={styles.title} onClick={onPost}>
             {title}
           </div>
-          <div className={styles.subtitle}>{subtitle}</div>
+          <div className={styles.subtitle} onClick={onPost}>
+            {subtitle}
+          </div>
           <div className={styles.icons}>
             <span className={styles.views}>
               <Icon.EyeOutlined /> {views}

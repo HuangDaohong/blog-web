@@ -28,32 +28,35 @@
     display: flex;
     flex-direction: column;
     width: 25%;
-    padding: 57px 10px 10px;
+    padding: 74px 10px 10px;
     .card_web {
       display: flex;
       flex-direction: column;
       align-items: center;
       height: auto;
-      padding-top: 20px;
+
+      /* padding-top: 20px; */
       border-radius: 10px;
       box-shadow: 2px 3px 10px 2px rgb(75 158 111 / 20%);
       &:hover {
         box-shadow: 2px 3px 10px 2px rgb(75 158 111 / 40%);
       }
       .avatar {
+        position: relative;
+        top: -20px;
         transition: all 1.2s;
       }
       .avatar:hover {
-        transform: rotate(360deg);
+        transform: rotate(360deg) scale(1.4);
       }
       .web_title {
-        margin-top: 10px;
         font-family: 'Courier New', Courier, monospace;
         font-size: 25px;
         font-weight: bold;
         color: rgb(49 191 210);
       }
       .web_sentence {
+        margin-top: 5px;
         font-family: KAITI;
         font-size: 15px;
         color: #565252;
@@ -87,12 +90,12 @@
       }
     }
     .card_notice {
-      display: flex;
+      /*    display: flex;
       flex-direction: column;
-      align-items: center;
-      height: 86px;
+      align-items: center; */
+      min-height: 86px;
       padding: 20px 0;
-      margin-top: 20px;
+      margin-top: 15px;
       font-family: KAITI;
       font-weight: 600;
       color: #817d7d;
@@ -106,7 +109,7 @@
       }
     }
     .card_tags {
-      margin: 20px 0;
+      margin: 15px 0;
       border-radius: 10px;
       box-shadow: 2px 3px 10px 2px rgb(75 158 111 / 20%);
       &:hover {

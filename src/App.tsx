@@ -5,6 +5,13 @@ import { rc, RouteKey } from '@/routes';
 import AwesomeLayout from '@/layouts';
 import ArticlePage from '@/pages/Article';
 const App: React.FC = () => {
+  window.addEventListener('visibilitychange', function () {
+    if (document.visibilityState === 'hidden') {
+      document.title = '呜呜呜,不要走!!😭😭😭';
+    } else {
+      document.title = 'Huang Blog';
+    }
+  });
   return (
     <div className={styles.app}>
       <BrowserRouter>

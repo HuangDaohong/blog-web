@@ -14,7 +14,9 @@ import { useText } from '@/utils/useText';
 
 const SiderCom: React.FC = () => {
   const elRef = React.useRef<HTMLSpanElement>(null);
-  useText(elRef, { strings: ['分享技术,分享生活,感谢支持!'] });
+  useText(elRef, {
+    strings: ['你好,欢迎访问!登陆qq评论点什么吧!', '分享技术,分享生活,感谢支持!', '欢迎阅读点赞和评论']
+  });
 
   const navigate = useNavigate();
   const [dataList, setDataList] = useSafeState<any[]>([]);
@@ -65,7 +67,7 @@ const SiderCom: React.FC = () => {
   return (
     <div className={styles.home_sider}>
       <div className={styles.card_web}>
-        <Avatar src={acatarImg} size={70} alt="avatar" className={styles.avatar} />
+        <Avatar src={acatarImg} size={80} alt="avatar" className={styles.avatar} />
         <span className={styles.web_title}>HUANG BLOG</span>
         <span className={styles.web_sentence}>{sentence || '欢迎访问👋👋👋'}</span>
         <div className={styles.webcountinfo}>
@@ -92,6 +94,7 @@ const SiderCom: React.FC = () => {
       <div className={styles.card_notice}>
         {/* <Icon.SoundTwoTone twoToneColor="rgb(49 191 210)" style={{ fontSize: '23px' }} /> */}
         <SvgIcon symbolId="铃铛" width="24px" height="24px" />
+        <br />
         {/* <span>分享技术,分享生活,感谢支持!</span> */}
         <span ref={elRef}></span>
       </div>
@@ -104,7 +107,7 @@ const SiderCom: React.FC = () => {
           {/* 显示网站运行总时间*/}
         </div>
         <div>
-          <span>运行时间：{dayjs().diff(dayjs(new Date('2022-8-30')), 'day')}天</span>
+          <span>运行时间：{dayjs().diff(dayjs(new Date('2021-8-30')), 'day')}天</span>
         </div>
         <div>
           <a

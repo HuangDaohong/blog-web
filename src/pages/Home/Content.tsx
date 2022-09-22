@@ -121,7 +121,7 @@ const ContentCom: React.FC = () => {
             key={1}
             hasMore={hasMore}
             loader={load()}
-            endMessage={<Divider>🙈END🙈</Divider>}
+            endMessage={data.list.length !== 0 ? <Divider>🙈END🙈</Divider> : ''}
           >
             {data?.list?.map(item => (
               // <div key={item.id} style={{ padding: 12, border: '1px solid #f5f5f5', height: '200px' }}>
