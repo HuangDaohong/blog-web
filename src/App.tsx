@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { rc, RouteKey } from '@/routes';
 import AwesomeLayout from '@/layouts';
 import ArticlePage from '@/pages/Article';
+
 const App: React.FC = () => {
   window.addEventListener('visibilitychange', function () {
     if (document.visibilityState === 'hidden') {

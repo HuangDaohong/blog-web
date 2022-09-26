@@ -211,7 +211,7 @@ const ArticleView: React.FC = () => {
           ) : null}
         </div>
 
-        <Affix offsetTop={80}>
+        <Affix offsetTop={20}>
           <div>
             <div className={styles.catalog}>
               <div style={{ maxHeight: '50vh', overflow: 'auto', backgroundColor: 'white' }}>

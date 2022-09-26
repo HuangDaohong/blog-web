@@ -16,6 +16,11 @@ import { ItemType } from 'antd/lib/menu/hooks/useItems';
 import { useScroll } from '@/utils/useScroll';
 import store from '@/redux';
 import { updateUserInfo } from '@/redux/features/acountSlice';
+/* import algoliasearch from 'algoliasearch/lite';
+import { InstantSearch, SearchBox, Hits } from 'react-instantsearch-dom';
+// import { InstantSearch, useHits } from 'react-instantsearch-hooks-web';
+const searchClient = algoliasearch('4DXCL8LEPG', '7d685c4d73358013b105b648c7d96082');
+ */
 const dorpdown_menuItems: ItemType[] = [
   {
     key: 'profile',
@@ -162,6 +167,11 @@ const AwesomeHeader: React.FC = () => {
               // style={{ width: 304 }}
               onSearch={onSearch}
             />
+
+            {/*             <InstantSearch indexName="blog_store" searchClient={searchClient}>
+              <SearchBox />
+              <Hits />
+            </InstantSearch> */}
           </div>
           <div className={styles.menubox}>
             <Menu
