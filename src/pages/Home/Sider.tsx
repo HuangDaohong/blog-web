@@ -110,11 +110,7 @@ const SiderCom: React.FC = () => {
           <span>运行时间：{dayjs().diff(dayjs(new Date('2021-8-30')), 'day')}天</span>
         </div>
         <div>
-          <a
-            href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=2021041227"
-            target="_blank"
-            rel="noreferrer"
-          >
+          <a href="https://beian.miit.gov.cn/" target="_blank" rel="noreferrer">
             <img
               src="https://lf3-cdn-tos.bytescm.com/obj/static/xitu_juejin_web/img/police.d0289dc.png"
               alt=""

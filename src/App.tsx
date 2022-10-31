@@ -18,7 +18,9 @@ const App: React.FC = () => {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<AwesomeLayout />}>
-            <Route index element={<Navigate to={rc(RouteKey.Home).path} replace />} />
+            {/* <Route index element={<Navigate to={rc(RouteKey.Home).path} replace />} /> */}
+            <Route path="/" element={<Navigate to={rc(RouteKey.Home).path} />} />
+
             <Route path={rc(RouteKey.Home).path} element={rc(RouteKey.Home).element} />
             <Route path={rc(RouteKey.Talks).path} element={rc(RouteKey.Talks).element} />
             <Route path={rc(RouteKey.About).path} element={rc(RouteKey.About).element} />
