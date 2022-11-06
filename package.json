@@ -25,7 +25,7 @@
     "@reduxjs/toolkit": "^1.8.4",
     "ahooks": "^3.7.0",
     "algoliasearch": "^4.14.2",
-    "antd": "^4.23.0",
+    "antd": "^4.24.0",
     "antd-img-crop": "^4.2.4",
     "axios": "^0.27.2",
     "classnames": "^2.3.1",

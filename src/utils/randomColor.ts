@@ -16,7 +16,6 @@ const color = [
   'warning',
   'default'
 ];
-
 export const getColor = () => color[Math.floor(Math.random() * color.length)];
 export const getRandomColor = () => {
   const r = Math.floor(Math.random() * 256);

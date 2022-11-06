@@ -3,7 +3,8 @@ import react from '@vitejs/plugin-react';
 import viteEslint from 'vite-plugin-eslint';
 import * as path from 'path';
 import compressPlugin from 'vite-plugin-compression';
-import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'; // 导入svg图标
+import { createSvgIconsPlugin } from 'vite-plugin-svg-icons';
+
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
@@ -19,9 +20,7 @@ export default defineConfig({
     })
   ],
   resolve: {
-    // 解析器
     alias: {
-      // 别名, 可以在引用的时候直接用别名
       '@': path.resolve(__dirname, 'src')
     }
   },

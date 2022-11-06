@@ -1,26 +1,29 @@
 import * as React from 'react';
-import { Menu, Affix, Input, Drawer, Modal, notification, Dropdown, Avatar } from 'antd';
-import * as Icon from '@ant-design/icons';
-import SvgIcon from '@/utils/SvgIcon';
-import { menuItems } from './menuItems';
 import { useSearchParams, useNavigate, useLocation } from 'react-router-dom';
+import { Menu, Affix, Input, Drawer, Modal, notification, Dropdown, Avatar, AutoComplete } from 'antd';
+import * as Icon from '@ant-design/icons';
+import { ItemType } from 'antd/lib/menu/hooks/useItems';
+import { menuItems } from './menuItems';
 import styles from './index.module.less';
-import { useRecoilState } from 'recoil';
 import { keywordState } from '@/store/index';
 import LoginModal from './LoginModal';
 import * as mainApi from '@/api';
 import { useDispatch, useSelector } from 'react-redux';
 import { GetRootState } from '@/redux';
 import { logout } from '@/redux/features/acountSlice';
-import { ItemType } from 'antd/lib/menu/hooks/useItems';
 import { useScroll } from '@/utils/useScroll';
+import { useSetRecoilState } from 'recoil';
 import store from '@/redux';
 import { updateUserInfo } from '@/redux/features/acountSlice';
-/* import algoliasearch from 'algoliasearch/lite';
-import { InstantSearch, SearchBox, Hits } from 'react-instantsearch-dom';
-// import { InstantSearch, useHits } from 'react-instantsearch-hooks-web';
-const searchClient = algoliasearch('4DXCL8LEPG', '7d685c4d73358013b105b648c7d96082');
- */
+import { updateHistoryWords } from '@/redux/features/configSlice';
+import SvgIcon from '@/utils/SvgIcon';
+import { checkIsLocalPage } from '@/utils/checkIsLocalPage';
+import dayjs from 'dayjs';
+import 'dayjs/locale/zh-cn';
+dayjs.locale('zh-cn');
+import relativeTime from 'dayjs/plugin/relativeTime';
+dayjs.extend(relativeTime);
+
 const dorpdown_menuItems: ItemType[] = [
   {
     key: 'profile',
@@ -34,48 +37,19 @@ const dorpdown_menuItems: ItemType[] = [
   }
 ];
 const AwesomeHeader: React.FC = () => {
-  // 自定义hooks
   const isAffix = useScroll();
   const navigate = useNavigate();
   const location = useLocation();
   const dispatch = useDispatch();
   const { user } = useSelector((state: GetRootState) => state.account);
-
+  const { historyWords } = useSelector((state: GetRootState) => state.history);
   const [visible, setVisible] = React.useState(false);
-  const [keyword, setKeyword] = useRecoilState(keywordState);
-  // const [ishidden, setIsHidden] = React.useState(false);
+  const setKeyword = useSetRecoilState(keywordState);
   const [modalVisible, setModalVisible] = React.useState(false);
-
-  //用户信息
   const [open, setOpen] = React.useState(false);
-
   const [params] = useSearchParams();
-  // const navigate = useNavigate();
-  const getdata = async id => {
-    const result = await mainApi.userService.getQQ({ id });
-    if (result.code === 0) {
-      result.data.token = params.get('token');
-      store.dispatch(updateUserInfo(result.data));
-      notification.success({ message: '欢迎登录', duration: 1 });
-    } else {
-      notification.error({ message: result.message, description: '请联系管理员' });
-    }
-    // navigate('/');
-    const currentUrl = localStorage.getItem('currentUrl');
-    navigate(`${currentUrl || '/'}`);
-    localStorage.removeItem('currentUrl');
-  };
-
-  React.useEffect(() => {
-    const id = params.get('qqid');
-    if (id) {
-      getdata(id);
-    }
-  }, [params]);
-
-  const hideModal = () => {
-    setOpen(false);
-  };
+  const inputRef = React.useRef(null); //搜素框的ref
+  const [options, setOptions] = React.useState([]); //搜索框的options
   const handleHeaderMenuClick = React.useCallback(({ key }) => {
     if (key === 'logout') {
       Modal.confirm({
@@ -91,23 +65,32 @@ const AwesomeHeader: React.FC = () => {
       });
     } else {
       setOpen(true);
-      // message.warning('用户信息');
     }
   }, []);
+
   const headerMenu = React.useMemo(
     () => <Menu items={dorpdown_menuItems} onClick={handleHeaderMenuClick} />,
     []
   );
+
+  const hideModal = () => {
+    setOpen(false);
+  };
 
   const onSearch = (value: string) => {
     if (value.length <= 20) {
       setKeyword(null);
       setKeyword(value.trim());
       navigate('/');
+      dispatch(updateHistoryWords(value));
+      // 宏任务失去焦点
+      setTimeout(() => {
+        inputRef?.current?.blur();
+      }, 0);
     }
-    console.log(keyword);
   };
 
+  // 全屏
   const toggleFullScreen = () => {
     if (!document.fullscreenElement) {
       document.documentElement.requestFullscreen();
@@ -119,59 +102,110 @@ const AwesomeHeader: React.FC = () => {
   };
 
   const qqLogin = () => {
-    console.log('pathname', location.pathname);
-    //将pathname存入localStorge
     localStorage.setItem('currentUrl', location.pathname);
     setModalVisible(true);
   };
 
-  // // 添加鼠标滚动事件,滚动时隐藏导航栏，已经改为自定义hooks
-  // const handleScroll = e => {
-  //   if (e.wheelDelta < 0 && document.documentElement.scrollTop > 600) {
-  //     setIsHidden(true);
-  //   } else {
-  //     setIsHidden(false);
-  //   }
-  // };
-  // const handleScrollisTop = () => {
-  //   if (window.scrollY === 0) {
-  //     setIsHidden(false);
-  //   }
-  // };
+  const getdata = async id => {
+    const result = await mainApi.userService.getQQ({ id });
+    if (result.code === 0) {
+      result.data.token = params.get('token');
+      store.dispatch(updateUserInfo(result.data));
+      notification.success({ message: '欢迎登录', duration: 1 });
+    } else {
+      notification.error({ message: result.message, description: '请联系管理员' });
+    }
+    const currentUrl = localStorage.getItem('currentUrl');
+    navigate(`${currentUrl || '/'}`);
+    localStorage.removeItem('currentUrl');
+  };
 
-  // React.useEffect(() => {
-  //   window.addEventListener('mousewheel', handleScroll);
-  //   window.addEventListener('scroll', handleScrollisTop);
-  //   return () => {
-  //     window.removeEventListener('mousewheel', handleScroll);
-  //     window.removeEventListener('scroll', handleScrollisTop);
-  //   };
-  // }, []);
+  const getOptions = () => {
+    let res = historyWords.map(item => {
+      return {
+        value: item.value,
+        // label: item.value
+        label: (
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'space-between'
+            }}
+          >
+            <span>
+              <Icon.HistoryOutlined />
+              &emsp;
+              {item.value}
+            </span>
+            {item.date.length < 10 ? <span>{item.date}</span> : <span>{dayjs(item.date).fromNow()}</span>}
+          </div>
+        )
+      };
+    });
+    setOptions(res ?? []);
+  };
+  React.useEffect(() => {
+    getOptions();
+  }, [historyWords]);
+  React.useEffect(() => {
+    const id = params.get('qqid');
+    if (id) {
+      getdata(id);
+    }
+  }, [params]);
 
+  React.useEffect(() => {
+    checkIsLocalPage();
+  }, []);
+
+  /*   // 添加鼠标滚动事件,滚动时隐藏导航栏，已经改为自定义hooks
+  const handleScroll = e => {
+    if (e.wheelDelta < 0 && document.documentElement.scrollTop > 600) {
+      setIsHidden(true);
+    } else {
+      setIsHidden(false);
+    }
+  };
+  const handleScrollisTop = () => {
+    if (window.scrollY === 0) {
+      setIsHidden(false);
+    }
+  };
+
+  React.useEffect(() => {
+    window.addEventListener('mousewheel', handleScroll);
+    window.addEventListener('scroll', handleScrollisTop);
+    return () => {
+      window.removeEventListener('mousewheel', handleScroll);
+      window.removeEventListener('scroll', handleScrollisTop);
+    };
+  }, []); */
+  // const options = [{ value: 'Burns Bay Road' }, { value: 'Downing Street' }, { value: 'Wall Street' }];
   return (
     <>
       <Affix offsetTop={0.000000001}>
-        {/* <div className={styles.container} style={{ transform: ishidden ? 'translate3d(0,-100%,0)' : '' }}> */}
         <div className={styles.container} style={{ transform: !isAffix ? 'translate3d(0,-100%,0)' : '' }}>
           <div className={styles.logo} onClick={() => navigate('/')}>
             <SvgIcon symbolId="logo" width="50px" height="50px" />
             <span className={styles.logo_title}>Huang Blog</span>
           </div>
           <div className={styles.search}>
-            <Input.Search
-              placeholder="请输入关键字..."
-              enterButton="搜索"
-              // disabled
-              // size="large"
-              allowClear
-              // style={{ width: 304 }}
-              onSearch={onSearch}
-            />
-
-            {/*             <InstantSearch indexName="blog_store" searchClient={searchClient}>
-              <SearchBox />
-              <Hits />
-            </InstantSearch> */}
+            <AutoComplete
+              style={{ width: 250 }}
+              options={options}
+              onSelect={onSearch}
+              dropdownMatchSelectWidth={250}
+            >
+              <Input.Search
+                placeholder="请输入关键字..."
+                enterButton="搜索"
+                allowClear
+                onSearch={onSearch}
+                ref={inputRef}
+                // disabled
+                // style={{ width: 304 }}
+              />
+            </AutoComplete>
           </div>
           <div className={styles.menubox}>
             <Menu
@@ -196,11 +230,6 @@ const AwesomeHeader: React.FC = () => {
             <div onClick={toggleFullScreen} className={styles.fullscreen}>
               <Icon.ExpandOutlined />
             </div>
-
-            {/*  className={styles.user} /> */}
-            {/* <span className={styles.user} onClick={() => setModalVisible(true)}>
-              <SvgIcon symbolId="cat" width="40px" height="40px" />
-            </span> */}
             {user.token ? (
               <Dropdown overlay={headerMenu} arrow>
                 <Avatar
@@ -210,7 +239,7 @@ const AwesomeHeader: React.FC = () => {
               </Dropdown>
             ) : (
               <div className={styles.user} onClick={qqLogin}>
-                {/* <SvgIcon symbolId="bixing" width="40px" height="40px" /> */}登 录
+                登 录
               </div>
             )}
           </div>
@@ -218,6 +247,7 @@ const AwesomeHeader: React.FC = () => {
       </Affix>
 
       <LoginModal modalVisible={modalVisible} setModalVisible={setModalVisible} />
+
       <Modal
         title="用户信息"
         open={open}
@@ -241,18 +271,6 @@ const AwesomeHeader: React.FC = () => {
       </div>
       <Drawer placement="left" onClose={() => setVisible(false)} open={visible} width={170} closable={false}>
         <div className={styles.mobileNavBox}>
-          {/* <div>
-            <Input.Search
-              placeholder="搜索..."
-              enterButton="Go"
-              // disabled
-              // size="large"
-              size="small"
-              allowClear
-              onSearch={onSearch}
-              style={{ marginBottom: '10px' }}
-            />
-          </div> */}
           <div onClick={() => navigate('/')} className={styles.mylogo}>
             <SvgIcon symbolId="logo" width="40px" height="40px" />
             Huang Blog

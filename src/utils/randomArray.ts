@@ -13,3 +13,7 @@ export const shuffleArray = (array: any[]) => {
   }
   return res;
 };
+
+// export const shuffleArray2 = (array: any[]) => {
+//   return array.sort(() => Math.random() - 0.5);
+// };

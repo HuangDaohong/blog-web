@@ -6,13 +6,6 @@ import AwesomeLayout from '@/layouts';
 import ArticlePage from '@/pages/Article';
 
 const App: React.FC = () => {
-  window.addEventListener('visibilitychange', function () {
-    if (document.visibilityState === 'hidden') {
-      document.title = '呜呜呜,不要走!!😭😭😭';
-    } else {
-      document.title = 'Huang Blog';
-    }
-  });
   return (
     <div className={styles.app}>
       <BrowserRouter>
@@ -20,7 +13,6 @@ const App: React.FC = () => {
           <Route path="/" element={<AwesomeLayout />}>
             {/* <Route index element={<Navigate to={rc(RouteKey.Home).path} replace />} /> */}
             <Route path="/" element={<Navigate to={rc(RouteKey.Home).path} />} />
-
             <Route path={rc(RouteKey.Home).path} element={rc(RouteKey.Home).element} />
             <Route path={rc(RouteKey.Talks).path} element={rc(RouteKey.Talks).element} />
             <Route path={rc(RouteKey.About).path} element={rc(RouteKey.About).element} />
@@ -29,8 +21,8 @@ const App: React.FC = () => {
             <Route path={rc(RouteKey.Works).path} element={rc(RouteKey.Works).element} />
             {/* <Route path={`${rc(RouteKey.Article).path}/*`} element={rc(RouteKey.Article).element} /> */}
             <Route path={`${rc(RouteKey.Article).path}/*`} element={<ArticlePage />} />
-            <Route path={rc(RouteKey.NotFound).path} element={rc(RouteKey.NotFound).element} />
           </Route>
+          <Route path={rc(RouteKey.NotFound).path} element={rc(RouteKey.NotFound).element} />
         </Routes>
       </BrowserRouter>
     </div>

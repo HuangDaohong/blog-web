@@ -1,31 +1,36 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
-import { accountSlice } from '@/redux/features/acountSlice';
 // import storageSession from 'redux-persist/lib/storage/session';
 import storage from 'redux-persist/lib/storage';
 import { persistReducer } from 'redux-persist';
 import store from '@/redux';
+import { accountSlice } from '@/redux/features/acountSlice';
+import { configSlice } from '@/redux/features/configSlice';
 
+// create reducer
 const rootReducer = combineReducers({
-  account: accountSlice.reducer
+  account: accountSlice.reducer,
+  history: configSlice.reducer
 });
 
+// redux persist
 const persistConfig = {
   key: 'blog_persist',
-  storage,
+  storage
   // storage: storageSession //会话存储
-  whitelist: ['account'] // 只持久化 account 的数据
   // blacklist: ['account'] // 不持久化 account 的数据
+  // whitelist: ['account'] // 只持久化 account 的数据
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
+// store
 export default configureStore({
   reducer: persistedReducer,
   devTools: import.meta.env.DEV,
-  // devTools: true,
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({
-      serializableCheck: false // https://redux-toolkit-cn.netlify.app/usage/usage-guide/
+      // https://redux-toolkit-cn.netlify.app/usage/usage-guide/
+      serializableCheck: false
     })
 });
 

@@ -1,13 +1,14 @@
 import * as React from 'react';
 import { useInfiniteScroll } from 'ahooks';
 import { Skeleton, Divider, Tabs } from 'antd';
+import InfiniteScroll from 'react-infinite-scroll-component';
+
 import * as mainApi from '@/api';
 import { Article } from '@/types';
 import { useRecoilValue } from 'recoil';
 import { getkeywordState } from '@/store/index';
 // import { getTargetElement } from 'ahooks/lib/utils/domTarget';
 import ArticleCard from '@/components/ArticleCard';
-import InfiniteScroll from 'react-infinite-scroll-component';
 
 interface Result {
   list: Article[];
@@ -177,6 +178,7 @@ const ContentCom: React.FC = () => {
   );
 };
 export default React.memo(ContentCom);
+
 // import * as React from 'react';
 // import { useInfiniteScroll } from 'ahooks';
 // import { Skeleton, Divider, Spin, Tabs } from 'antd';

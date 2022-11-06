@@ -346,6 +346,8 @@ import styles from './index.module.less';
 import { useSelector } from 'react-redux';
 import { GetRootState } from '@/redux';
 import { IComment } from '@/types';
+import { META } from '@/config/constant';
+
 interface Props {
   loading?: boolean;
   articleID?: number;
@@ -424,7 +426,8 @@ const CommentCom: React.FC<Props> = props => {
       {/* {props.loading}文章id为{props.articleID}共有{data?.data.total}组评论 */}
       <span className={styles.commenttitle}>
         <Icon.CommentOutlined />
-        &nbsp;评论&nbsp;({data?.data?.total})
+        &nbsp;评论&nbsp;
+        {data?.data?.total ? <span>({data?.data?.total})</span> : ''}
       </span>
       <div className={styles.commentEdit}>
         <Input.TextArea
@@ -436,7 +439,6 @@ const CommentCom: React.FC<Props> = props => {
           required
           bordered={false}
           maxLength={400}
-          // showCount
         />
         <div className={styles.commentEditBottonm}>
           <Emoji addContent={addCommentReply} />
@@ -445,7 +447,7 @@ const CommentCom: React.FC<Props> = props => {
               取消
             </Button>
             &emsp; */}
-            <Button type="primary" onClick={submitComment}>
+            <Button type="primary" onClick={submitComment} disabled={!commentReply.trim()}>
               提交
             </Button>
           </div>
@@ -454,10 +456,7 @@ const CommentCom: React.FC<Props> = props => {
       {commentist.map(item => (
         <div key={item.id}>
           <div className={styles.father}>
-            <Avatar
-              src={item?.tb_user?.avatar || 'https://hdhblog.cn/api/6ddb1547d629213e63f307700.gif'}
-              size={48}
-            />
+            <Avatar src={item?.tb_user?.avatar || META.defaultAvatar} size={48} />
             <span className={styles.username}>{item?.tb_user?.name}</span>
             {item?.tb_user?.id === 1 ? <span className={styles.admin}>作者</span> : null}
             {item?.tb_user?.id !== 1 ? (
@@ -541,10 +540,7 @@ const CommentCom: React.FC<Props> = props => {
             {item.children
               ? item.children.map(child => (
                   <div key={child.id} className={styles.child}>
-                    <Avatar
-                      src={child?.tb_user?.avatar || 'https://hdhblog.cn/api/6ddb1547d629213e63f307700.gif'}
-                      size={24}
-                    />
+                    <Avatar src={child?.tb_user?.avatar || META.defaultAvatar} size={24} />
                     <span className={styles.childusername}>{child?.tb_user?.name}</span>
                     {child?.tb_user?.id === 1 ? <span className={styles.admin}>作者</span> : null}
                     {child?.tb_user?.id !== 1 ? (

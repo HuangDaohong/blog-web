@@ -84,7 +84,7 @@ export const routeMap: ReadonlyMap<RouteKey, RouteConfig> = new Map(
       element: lazyLoad(React.lazy(() => import('@/pages/Talks'))),
       name: '动态',
       path: '/talks',
-      icon: <Icon.MessageOutlined />
+      icon: <Icon.AlibabaOutlined />
     },
     {
       key: RouteKey.Works,
