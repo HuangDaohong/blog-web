@@ -5,17 +5,16 @@ import * as Icon from '@ant-design/icons';
 import { ItemType } from 'antd/lib/menu/hooks/useItems';
 import { menuItems } from './menuItems';
 import styles from './index.module.less';
-import { keywordState } from '@/store/index';
 import LoginModal from './LoginModal';
 import * as mainApi from '@/api';
 import { useDispatch, useSelector } from 'react-redux';
 import { GetRootState } from '@/redux';
 import { logout } from '@/redux/features/acountSlice';
 import { useScroll } from '@/utils/useScroll';
-import { useSetRecoilState } from 'recoil';
 import store from '@/redux';
 import { updateUserInfo } from '@/redux/features/acountSlice';
 import { updateHistoryWords } from '@/redux/features/configSlice';
+import { updatekeyword } from '@/redux/features/keywordSlice';
 import SvgIcon from '@/utils/SvgIcon';
 import { checkIsLocalPage } from '@/utils/checkIsLocalPage';
 import dayjs from 'dayjs';
@@ -44,7 +43,6 @@ const AwesomeHeader: React.FC = () => {
   const { user } = useSelector((state: GetRootState) => state.account);
   const { historyWords } = useSelector((state: GetRootState) => state.history);
   const [visible, setVisible] = React.useState(false);
-  const setKeyword = useSetRecoilState(keywordState);
   const [modalVisible, setModalVisible] = React.useState(false);
   const [open, setOpen] = React.useState(false);
   const [params] = useSearchParams();
@@ -79,8 +77,7 @@ const AwesomeHeader: React.FC = () => {
 
   const onSearch = (value: string) => {
     if (value.length <= 20) {
-      setKeyword(null);
-      setKeyword(value.trim());
+      dispatch(updatekeyword(value.trim()));
       navigate('/');
       dispatch(updateHistoryWords(value));
       // 宏任务失去焦点

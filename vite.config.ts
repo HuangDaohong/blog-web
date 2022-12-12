@@ -4,6 +4,7 @@ import viteEslint from 'vite-plugin-eslint';
 import * as path from 'path';
 import compressPlugin from 'vite-plugin-compression';
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons';
+import vitePluginImp from 'vite-plugin-imp';
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -12,6 +13,15 @@ export default defineConfig({
     compressPlugin(),
     viteEslint({
       failOnError: false
+    }),
+    vitePluginImp({
+      optimize: true, // 是否优化
+      libList: [
+        {
+          libName: 'antd',
+          style: name => `antd/es/${name}/style`
+        }
+      ]
     }),
     createSvgIconsPlugin({
       // 导入svg图标,

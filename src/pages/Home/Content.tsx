@@ -2,11 +2,11 @@ import * as React from 'react';
 import { useInfiniteScroll } from 'ahooks';
 import { Skeleton, Divider, Tabs } from 'antd';
 import InfiniteScroll from 'react-infinite-scroll-component';
+import { useSelector } from 'react-redux';
+import { GetRootState } from '@/redux';
 
 import * as mainApi from '@/api';
 import { Article } from '@/types';
-import { useRecoilValue } from 'recoil';
-import { getkeywordState } from '@/store/index';
 // import { getTargetElement } from 'ahooks/lib/utils/domTarget';
 import ArticleCard from '@/components/ArticleCard';
 
@@ -18,11 +18,9 @@ interface Result {
 }
 const ContentCom: React.FC = () => {
   const ref = React.useRef<HTMLDivElement>(null);
-  let keyword = useRecoilValue(getkeywordState);
-  // const [orderKey, setOrderKey] = useSafeState<string>('createdAt');
   const orderKeyRef = React.useRef('createdAt');
+  const { keyword } = useSelector((state: GetRootState) => state.keyword);
 
-  keyword = keyword || null;
   const getLoadMoreList = async (pageNum: number, pageSize: number): Promise<Result> => {
     const data = await mainApi.articleService.findAll({
       pageNum,
@@ -39,7 +37,7 @@ const ContentCom: React.FC = () => {
           pageNum,
           pageSize
         });
-      }, 200);
+      }, 20);
     });
   };
 
@@ -54,7 +52,6 @@ const ContentCom: React.FC = () => {
       // threshold: 0,
       // target: ref,
       // manual: true, // 手动触发
-      // 要加上下面这句，不然重复加载，我也不知道为啥。但依然有一次请求加载两次的现象
       isNoMore: data => data?.total <= data?.pageNum * PAGE_SIZE
     }
   );
@@ -96,12 +93,6 @@ const ContentCom: React.FC = () => {
   // }, []);
   return (
     <div ref={ref} style={{ height: '100%', overflow: 'auto', padding: 12 }}>
-      {/* <Tabs defaultActiveKey="createdAt" onChange={onChange}>
-        <Tabs.TabPane tab="最新" key="createdAt"></Tabs.TabPane>
-        <Tabs.TabPane tab="最热" key="views"></Tabs.TabPane>
-        <Tabs.TabPane tab="最赞" key="likes"></Tabs.TabPane>
-        <Tabs.TabPane tab="推荐" key="recommend"></Tabs.TabPane>x
-      </Tabs> */}
       <Tabs
         defaultActiveKey="createdAt"
         onChange={onChange}
@@ -121,14 +112,10 @@ const ContentCom: React.FC = () => {
             next={loadMore}
             key={1}
             hasMore={hasMore}
-            loader={load()}
+            loader={load()} // 加载中
             endMessage={data.list.length !== 0 ? <Divider>🙈END🙈</Divider> : ''}
           >
             {data?.list?.map(item => (
-              // <div key={item.id} style={{ padding: 12, border: '1px solid #f5f5f5', height: '200px' }}>
-              //   {item.title}
-              //   {item.subtitle}
-              // </div>
               <ArticleCard key={item.article_id} article={item} />
             ))}
           </InfiniteScroll>

@@ -1,13 +1,13 @@
 import * as React from 'react';
 import styles from './index.module.less';
-import { useResetRecoilState } from 'recoil';
-import { keywordState } from '@/store';
+import { updatekeyword } from '@/redux/features/keywordSlice';
+import { useDispatch } from 'react-redux';
 import Content from './Content';
 import Sider from './Sider';
 const HomePage: React.FC = () => {
-  const resetList = useResetRecoilState(keywordState);
+  const dispatch = useDispatch();
   React.useEffect(() => {
-    resetList();
+    dispatch(updatekeyword(null));
   }, []);
   return (
     <div className={styles.container}>

@@ -15,7 +15,7 @@ const FriendsPage: React.FC = () => {
       <>
         <div className={styles.friendBox}>
           <span style={{ fontWeight: 'bold' }}>友链说明：</span>
-          <span>✔️原创优先 ✔️技术优先 ❌经常宕机 ❌不合法规 ❌红标报毒 </span>
+          <span>✔️原创优先 ✔️技术优先 ✔️https优先 ❌经常宕机 ❌不合法规 ❌红标报毒 </span>
           <br />
           <span>名称: Huang Blog</span>
           <br />

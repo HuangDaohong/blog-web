@@ -1,21 +1,22 @@
 import * as React from 'react';
 import { useNavigate } from 'react-router-dom';
 // import * as Icon from '@ant-design/icons';
-import { Avatar } from 'antd';
+// import { Avatar } from 'antd';
 import * as mainApi from '@/api';
 import { useReactive, useSafeState, useRequest } from 'ahooks';
 import type { SiteData } from '@/types';
-import acatarImg from '@/assets/images/avatar.jpg';
+// import acatarImg from '@/assets/images/avatar.jpg';
 import styles from './index.module.less';
 import SvgIcon from '@/utils/SvgIcon';
 import WordCloud from './WordCloud';
 import dayjs from 'dayjs';
 import { useText } from '@/utils/useText';
+import { META } from '@/config/constant';
 
 const SiderCom: React.FC = () => {
   const elRef = React.useRef<HTMLSpanElement>(null);
   useText(elRef, {
-    strings: ['你好,欢迎访问!登陆qq评论点什么吧!', '分享技术,分享生活,感谢支持!', '欢迎阅读点赞和评论']
+    strings: META.textStrings
   });
 
   const navigate = useNavigate();
@@ -67,7 +68,8 @@ const SiderCom: React.FC = () => {
   return (
     <div className={styles.home_sider}>
       <div className={styles.card_web}>
-        <Avatar src={acatarImg} size={80} alt="avatar" className={styles.avatar} />
+        {/* <Avatar src={acatarImg} size={80} alt="avatar" className={styles.avatar} /> */}
+        <div className={styles.avatar} />
         <span className={styles.web_title}>HUANG BLOG</span>
         <span className={styles.web_sentence}>{sentence || '欢迎访问👋👋👋'}</span>
         <div className={styles.webcountinfo}>
@@ -92,10 +94,8 @@ const SiderCom: React.FC = () => {
         </div>
       </div>
       <div className={styles.card_notice}>
-        {/* <Icon.SoundTwoTone twoToneColor="rgb(49 191 210)" style={{ fontSize: '23px' }} /> */}
         <SvgIcon symbolId="铃铛" width="24px" height="24px" />
         <br />
-        {/* <span>分享技术,分享生活,感谢支持!</span> */}
         <span ref={elRef}></span>
       </div>
       <div className={styles.card_tags}>
@@ -107,7 +107,7 @@ const SiderCom: React.FC = () => {
           {/* 显示网站运行总时间*/}
         </div>
         <div>
-          <span>运行时间：{dayjs().diff(dayjs(new Date('2021-8-30')), 'day')}天</span>
+          <span>运行时间：{dayjs().diff(new Date('2022-9-30'), 'day')}天</span>
         </div>
         <div>
           <a href="https://beian.miit.gov.cn/" target="_blank" rel="noreferrer">

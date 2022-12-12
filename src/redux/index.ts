@@ -5,19 +5,21 @@ import { persistReducer } from 'redux-persist';
 import store from '@/redux';
 import { accountSlice } from '@/redux/features/acountSlice';
 import { configSlice } from '@/redux/features/configSlice';
+import { keywordSlice } from '@/redux/features/keywordSlice';
 
 // create reducer
 const rootReducer = combineReducers({
   account: accountSlice.reducer,
-  history: configSlice.reducer
+  history: configSlice.reducer,
+  keyword: keywordSlice.reducer
 });
 
 // redux persist
 const persistConfig = {
   key: 'blog_persist',
-  storage
+  storage,
   // storage: storageSession //会话存储
-  // blacklist: ['account'] // 不持久化 account 的数据
+  blacklist: ['keyword'] // 不持久化 account 的数据
   // whitelist: ['account'] // 只持久化 account 的数据
 };
 
