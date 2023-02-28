@@ -16,8 +16,10 @@ const RegisterTab: React.FC<Props> = props => {
   // 发送验证码
   async function sendCode() {
     const email = formRegister.getFieldValue('email');
-    if (!email) {
-      message.error('请输入邮箱再获取验证码');
+    // 用户名
+    const name = formRegister.getFieldValue('name');
+    if (!email || !name) {
+      message.error('请输入邮箱和用户名再获取验证码');
       return;
     }
     setIsSend(true);

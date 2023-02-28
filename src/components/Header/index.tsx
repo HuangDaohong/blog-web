@@ -194,7 +194,7 @@ const AwesomeHeader: React.FC = () => {
               dropdownMatchSelectWidth={250}
             >
               <Input.Search
-                placeholder="请输入关键字..."
+                placeholder="全局搜索..."
                 enterButton="搜索"
                 allowClear
                 onSearch={onSearch}

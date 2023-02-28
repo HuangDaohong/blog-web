@@ -919,6 +919,11 @@
     redux-thunk "^2.4.1"
     reselect "^4.1.5"
 
+"@researchgate/react-intersection-observer@^1.3.5":
+  version "1.3.5"
+  resolved "https://registry.npmmirror.com/@researchgate/react-intersection-observer/-/react-intersection-observer-1.3.5.tgz#0321d2dd609aaacdb9bace8004d99c72824fb142"
+  integrity sha512-aYlsex5Dd6BAHMJvJrUoFp8gzgMSL27xFvrxkVYW0bV1RMAapVsO+QeYLtTaSF/QCflktODodvv+wJm49oMnnQ==
+
 "@rollup/pluginutils@^4.2.1":
   version "4.2.1"
   resolved "https://registry.npmmirror.com/@rollup/pluginutils/-/pluginutils-4.2.1.tgz#e6c6c3aba0744edce3fb2074922d3776c0af2a6d"
@@ -6574,6 +6579,13 @@ react-is@^18.0.0:
   version "18.2.0"
   resolved "https://registry.npmmirror.com/react-is/-/react-is-18.2.0.tgz#199431eeaaa2e09f86427efbb4f1473edb47609b"
   integrity sha512-xWGDIW6x921xtzPkhiULtthJHoJvBbF3q26fzloPCK0hsvxtPVelvftw3zjbHWSkR2km9Z+4uxbDDK/6Zw9B8w==
+
+react-progressive-graceful-image@^0.7.0:
+  version "0.7.0"
+  resolved "https://registry.npmmirror.com/react-progressive-graceful-image/-/react-progressive-graceful-image-0.7.0.tgz#e50197daada1e32bc9f87375bb22e6f51c21d8de"
+  integrity sha512-99uY2NmsYOcdMGVDSdbLWsRl+aVuRJyBIUYhR1ql4E8RJPoR2AZLvamdjnzSmAMFayCIx1cISF5AKqqQHhV/UQ==
+  dependencies:
+    "@researchgate/react-intersection-observer" "^1.3.5"
 
 react-redux@^8.0.2:
   version "8.0.2"
