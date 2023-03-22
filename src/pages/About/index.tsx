@@ -17,7 +17,7 @@ const AboutPage: React.FC = () => {
           <div className={styles.right}>
             <div className={styles.name}>
               <Space split={<Divider type="vertical" />}>
-                <span style={{ color: 'orange' }}>正在忙碌ing</span>
+                <span style={{ color: 'orange' }}>正在找前端实习ing</span>
                 <span>江苏 · 南京</span>
               </Space>
             </div>
@@ -29,8 +29,8 @@ const AboutPage: React.FC = () => {
             🙆‍♂ 关于我
           </Divider>
           <ul>
-            <li>😅 研二学生</li>
-            <li>💩 喜欢前端和算法</li>
+            <li>😅 2024届研究生</li>
+            <li>🍉 喜欢前端和机器学习</li>
             <li>✉️ 2224397297@qq.com</li>
           </ul>
           <Divider orientation="left" className={styles.divider}>
@@ -48,7 +48,7 @@ const AboutPage: React.FC = () => {
           <Divider orientation="left"> 📡 服务端</Divider> */}
 
           <ul>
-            <li>🖥️前后台 : React18+Hooks+TS+Vite3+Antd+Redux/Toolkit</li>
+            <li>🖥️前后台 : React Hooks+TS+Vite+Antd+Redux/Toolkit</li>
             <li>🔧服务端 : Node + ORM +Mysql</li>
             <li>🎉规范化 : Prettier+Eslint+Stylelint+husky+lint-staged+commitlint+commitizen+cz-git</li>
             <li>🕝计划中 : 有时间再Next+Nest重构 ...</li>

@@ -27,6 +27,14 @@ const WorksPage: React.FC = () => {
       desc: '基于 Koa2+ ORM + MySQL 的个人博客服务端',
       url: 'https://www.koajs.com.cn/',
       backgroundImg: 'https://hdhblog.cn/api/d4c12bf524eed78399ccead00.png'
+    },
+    {
+      key: 4,
+      name: '博客大屏（还没做）',
+      desc: '目前只做了屏幕适配',
+      url: 'https://hdhblog.cn/admin/screen',
+      backgroundImg:
+        'https://5b0988e595225.cdn.sohucs.com/images/20200324/bf73dbcd9e8c4ef5b98639d3dc5ac421.gif'
     }
   ];
   return (
