@@ -119,7 +119,7 @@ const SiderCom: React.FC = () => {
           </a>
         </div>
         <div>
-          <span>©2021-2022 Huang Blog</span>
+          <span>©2022-2023 Huang Blog</span>
         </div>
       </div>
     </div>

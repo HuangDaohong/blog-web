@@ -86,12 +86,13 @@ const ArticleView: React.FC = () => {
     );
     const data = await res.json();
     setIpInfo(data);
-    const addressInfo = await fetch(`https://ip.useragentinfo.com/json?ip=${data.ipAddress}`);
+    const addressInfo = await fetch('https://ip.useragentinfo.com/json');
     const addressData = await addressInfo.json();
     setAddress(addressData);
     await mainApi.configService.createVisitor({
-      ip: data.ipAddress,
-      city: addressData.province + ' ' + addressData.city + ' ' + addressData.isp
+      ip: data?.ipAddress,
+      city:
+        addressData?.country + ' ' + addressData?.province + ' ' + addressData?.city + ' ' + addressData?.isp
     });
   };
   React.useEffect(() => {
