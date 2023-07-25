@@ -4,6 +4,8 @@ import { updatekeyword } from '@/redux/features/keywordSlice';
 import { useDispatch } from 'react-redux';
 import Content from './Content';
 import Sider from './Sider';
+import { Affix } from 'antd';
+
 const HomePage: React.FC = () => {
   const dispatch = useDispatch();
   React.useEffect(() => {
@@ -14,9 +16,11 @@ const HomePage: React.FC = () => {
       <div className={styles.left}>
         <Content />
       </div>
-      <div className={styles.right}>
-        <Sider />
-      </div>
+      <Affix offsetTop={61}>
+        <div className={styles.right}>
+          <Sider />
+        </div>
+      </Affix>
     </div>
   );
 };

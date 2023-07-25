@@ -17,7 +17,7 @@ const AboutPage: React.FC = () => {
           <div className={styles.right}>
             <div className={styles.name}>
               <Space split={<Divider type="vertical" />}>
-                <span style={{ color: 'orange' }}>正在找前端实习ing</span>
+                <span style={{ color: 'orange' }}>正在前端秋招ing</span>
                 <span>江苏 · 南京</span>
               </Space>
             </div>
