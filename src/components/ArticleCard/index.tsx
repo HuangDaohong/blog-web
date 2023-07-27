@@ -8,7 +8,14 @@ import { Divider, Tag } from 'antd';
 import { os } from '@/enums';
 import { articleService } from '@/api';
 import styles from './index.module.less';
-const ArticleCard: React.FC<{ article: Article }> = ({ article }) => {
+import HighlightedText from './HighlightedText';
+
+interface IArticleCardProps {
+  article: Article;
+  searchKeyword?: string;
+}
+
+const ArticleCard: React.FC<IArticleCardProps> = ({ article, searchKeyword }) => {
   const {
     origin,
     createdAt,
@@ -33,6 +40,7 @@ const ArticleCard: React.FC<{ article: Article }> = ({ article }) => {
     }
     setLike(true);
   };
+
   return (
     <div className={styles.container}>
       <div className={styles.top}>
@@ -65,10 +73,10 @@ const ArticleCard: React.FC<{ article: Article }> = ({ article }) => {
       <div className={styles.bottome}>
         <div className={styles.bottome_left}>
           <div className={styles.title} onClick={onPost}>
-            {title}
+            <HighlightedText title={title} searchKeyword={searchKeyword} color="#44c5d6" />
           </div>
           <div className={styles.subtitle} onClick={onPost}>
-            {subtitle}
+            <HighlightedText title={subtitle} searchKeyword={searchKeyword} color="#44c5d6" />
           </div>
           <div className={styles.icons}>
             <span className={styles.views}>

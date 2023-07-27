@@ -20,7 +20,10 @@ const ContentCom: React.FC = () => {
   const ref = React.useRef<HTMLDivElement>(null);
   const orderKeyRef = React.useRef('createdAt');
   const { keyword } = useSelector((state: GetRootState) => state.keyword);
-
+  const [searchKeyword, setSearchKeyword] = React.useState<any>(keyword);
+  if (keyword !== searchKeyword && keyword) {
+    setSearchKeyword(keyword);
+  }
   const getLoadMoreList = async (pageNum: number, pageSize: number): Promise<Result> => {
     const data = await mainApi.articleService.findAll({
       pageNum,
@@ -37,7 +40,7 @@ const ContentCom: React.FC = () => {
           pageNum,
           pageSize
         });
-      }, 20);
+      }, 0);
     });
   };
 
@@ -116,7 +119,7 @@ const ContentCom: React.FC = () => {
             endMessage={data.list.length !== 0 ? <Divider>🙈END🙈</Divider> : ''}
           >
             {data?.list?.map(item => (
-              <ArticleCard key={item.article_id} article={item} />
+              <ArticleCard key={item.article_id} article={item} searchKeyword={searchKeyword} />
             ))}
           </InfiniteScroll>
         </div>

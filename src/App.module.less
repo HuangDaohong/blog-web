@@ -17,8 +17,22 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   :global {
+    ._container_mlv48_1 ._menubox_mlv48_31 ._menu_mlv48_31 {
+      background-color: transparent !important;
+    }
+    .ant-input-search .ant-input-group .ant-input-affix-wrapper:not(:last-child),
+    .ant-input-group > .ant-input-affix-wrapper:not(:last-child) .ant-input {
+      background-color: transparent !important;
+    }
+    .custom-menu .ant-menu-item-selected {
+      border-bottom: none; /* 移除选中菜单项的下划线 */
+    }
     .ant-timeline.ant-timeline-alternate .ant-timeline-item-right ._itembox_17nus_9 {
       text-align: left;
+    }
+    .ant-menu-horizontal > .ant-menu-item::after,
+    .ant-menu-horizontal > .ant-menu-submenu::after {
+      bottom: 100px !important;
     }
     .markdown-navigation .title-anchor.active {
       color: #44c5d6;
