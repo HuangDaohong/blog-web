@@ -56,7 +56,7 @@ export enum Title {
   Archives = '归档',
   Msg = '海内存知己，天涯若比邻',
   Link = '友情链接',
-  Works = '一些作品',
+  Works = '前端集合',
   About = '关于'
 }
 

@@ -44,7 +44,7 @@ const ContentCom: React.FC = () => {
     });
   };
 
-  const PAGE_SIZE = 7;
+  const PAGE_SIZE = 8;
 
   const { data, loading, loadMore, reload } = useInfiniteScroll(
     data => {
@@ -116,7 +116,7 @@ const ContentCom: React.FC = () => {
             key={1}
             hasMore={hasMore}
             loader={load()} // 加载中
-            endMessage={data.list.length !== 0 ? <Divider>🙈END🙈</Divider> : ''}
+            endMessage={data.list.length !== 0 ? <Divider>🙈 END 🙈</Divider> : ''}
           >
             {data?.list?.map(item => (
               <ArticleCard key={item.article_id} article={item} searchKeyword={searchKeyword} />

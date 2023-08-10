@@ -56,14 +56,16 @@ export const routeMap: ReadonlyMap<RouteKey, RouteConfig> = new Map(
       element: lazyLoad(React.lazy(() => import('@/pages/Article/Category'))),
       name: '分类',
       path: '/article/categories',
-      subPath: 'categories'
+      subPath: 'categories',
+      icon: <Icon.AppstoreOutlined />
     },
     {
       key: RouteKey.ArticleTags,
       element: lazyLoad(React.lazy(() => import('@/pages/Article/Tag'))),
       name: '标签',
       path: '/article/tags',
-      subPath: 'tags'
+      subPath: 'tags',
+      icon: <Icon.TagsOutlined />
     },
     {
       key: RouteKey.ArticleView,

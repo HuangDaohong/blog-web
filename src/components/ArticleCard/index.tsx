@@ -73,10 +73,10 @@ const ArticleCard: React.FC<IArticleCardProps> = ({ article, searchKeyword }) =>
       <div className={styles.bottome}>
         <div className={styles.bottome_left}>
           <div className={styles.title} onClick={onPost}>
-            <HighlightedText title={title} searchKeyword={searchKeyword} color="#44c5d6" />
+            <HighlightedText title={title} searchKeyword={searchKeyword} />
           </div>
           <div className={styles.subtitle} onClick={onPost}>
-            <HighlightedText title={subtitle} searchKeyword={searchKeyword} color="#44c5d6" />
+            <HighlightedText title={subtitle} searchKeyword={searchKeyword} />
           </div>
           <div className={styles.icons}>
             <span className={styles.views}>

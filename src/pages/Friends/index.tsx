@@ -17,23 +17,19 @@ const FriendsPage: React.FC = () => {
       <>
         <div className={styles.friendBox}>
           <span style={{ fontWeight: 'bold' }}>友链说明：</span>
-          <span>✔️原创优先 ✔️技术优先 ✔️https优先 ❌经常宕机 ❌不合法规 ❌红标报毒 </span>
-          <br />
-          <br />
+          <span> ✔️原创优先 ✔️技术优先 ✔️https优先 ❌经常宕机 ❌不合法规 ❌红标报毒 </span>
+          <p></p>
           <span style={{ display: 'flex' }}>
-            名称 : <Typography.Paragraph copyable>Huang Blog</Typography.Paragraph>
+            名称 : &emsp;<Typography.Paragraph copyable>Huang Blog</Typography.Paragraph>
           </span>
           <span style={{ display: 'flex' }}>
-            链接 : <Typography.Paragraph copyable>https://hdhblog.cn</Typography.Paragraph>
+            链接 : &emsp;<Typography.Paragraph copyable>https://hdhblog.cn</Typography.Paragraph>
           </span>
           <span style={{ display: 'flex' }}>
-            头像 :
+            头像 : &emsp;
             <Typography.Paragraph copyable>
               https://hdhblog.cn/assets/avatar.d568d935.jpg
             </Typography.Paragraph>
-          </span>
-          <span style={{ display: 'flex' }}>
-            描述 : <Typography.Paragraph copyable> 人生如戏</Typography.Paragraph>
           </span>
         </div>
         <div className={styles.box}>

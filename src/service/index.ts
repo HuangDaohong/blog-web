@@ -64,6 +64,8 @@ const customRequest = <D = any, T = any>(config: CustomRequestConfig<D>) => {
   return request.request<Response<T>>(config);
 };
 
+// https://www.axios-http.cn/docs/cancellation
+
 // 取消请求
 export const cancelRequest = (url: string | string[]) => {
   return request.cancelRequest(url);

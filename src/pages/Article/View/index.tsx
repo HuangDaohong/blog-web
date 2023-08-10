@@ -9,17 +9,25 @@ import 'markdown-navbar/dist/navbar.css';
 import { Viewer } from '@bytemd/react';
 import gfm from '@bytemd/plugin-gfm';
 import gemoji from '@bytemd/plugin-gemoji';
-import highlight2 from '@bytemd/plugin-highlight';
+// import highlight from '@bytemd/plugin-highlight';
+import highlight2 from '@bytemd/plugin-highlight-ssr';
 import mediumZoom from '@bytemd/plugin-medium-zoom'; //图片预览
 import mermaid from '@bytemd/plugin-mermaid';
-import { Wrapper } from './markdown';
+import { Wrapper } from './styles/markdown';
 import 'bytemd/dist/index.min.css';
-import 'highlight.js/styles/vs.css';
+import 'highlight.js/styles/github-dark.css'; // 代码高亮的主题样式(可自选)
+import './styles/custom-container.css';
 import styles from './index.module.less';
 import * as Icon from '@ant-design/icons';
 import { Category, Tag } from '@/types';
 import dayjs from 'dayjs';
 import CommentCom from '@/components/Comment';
+import { useScroll } from '@/utils/useScroll';
+import { useSelector } from 'react-redux';
+import { GetRootState } from '@/redux';
+import { customCodeBlock } from './plugins/codeBlock';
+import { customContainer } from './plugins/customContainer';
+
 // 下面这几个表示多少多少天之前，已经封装过另外一个，就暂时不用这个
 // import 'dayjs/locale/zh-cn';
 // dayjs.locale('zh-cn');
@@ -28,11 +36,14 @@ import CommentCom from '@/components/Comment';
 
 import { useTime } from '@/utils/useTime';
 
-const plugins = [gfm(), gemoji(), highlight2(), mediumZoom(), mermaid()];
-
 const ArticleView: React.FC = () => {
+  const plugins = React.useMemo(() => {
+    return [gfm(), gemoji(), highlight2(), mediumZoom(), mermaid(), customCodeBlock(), customContainer()];
+  }, []);
+
   const { id } = useParams();
   const navigate = useNavigate();
+  const isAffix = useScroll();
 
   const { timeText } = useTime();
   const [title, setTitle] = useSafeState<string>('');
@@ -51,6 +62,8 @@ const ArticleView: React.FC = () => {
   const [like, setLike] = useSafeState<boolean>(false);
   const [articleId, setArticleId] = useSafeState<number>();
 
+  const { user } = useSelector((state: GetRootState) => state.account);
+  console.log(user);
   // 节流模式
   const { data: recommendArticles } = useRequest(() => mainApi.articleService.recommend({ counts: 4 }));
   const { run, loading } = useRequest(mainApi.articleService.findOneByArticleId, {
@@ -89,11 +102,19 @@ const ArticleView: React.FC = () => {
     const addressInfo = await fetch('https://ip.useragentinfo.com/json');
     const addressData = await addressInfo.json();
     setAddress(addressData);
-    await mainApi.configService.createVisitor({
-      ip: data?.ipAddress,
-      city:
-        addressData?.country + ' ' + addressData?.province + ' ' + addressData?.city + ' ' + addressData?.isp
-    });
+    if (user?.name != 'admin') {
+      await mainApi.configService.createVisitor({
+        ip: data?.ipAddress,
+        city:
+          addressData?.country +
+          ' ' +
+          addressData?.province +
+          ' ' +
+          addressData?.city +
+          ' ' +
+          addressData?.isp
+      });
+    }
   };
   React.useEffect(() => {
     getIP();
@@ -212,7 +233,7 @@ const ArticleView: React.FC = () => {
           ) : null}
         </div>
 
-        <Affix offsetTop={20}>
+        <Affix offsetTop={isAffix ? 60 : 20}>
           <div>
             <div className={styles.catalog}>
               <div style={{ maxHeight: '50vh', overflow: 'auto', backgroundColor: 'white' }}>

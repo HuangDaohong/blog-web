@@ -17,15 +17,18 @@ export const menuItems: ItemType[] = [
     children: [
       {
         key: rc(RouteKey.ArticleArchives).path,
-        label: rc(RouteKey.ArticleArchives).name
+        label: rc(RouteKey.ArticleArchives).name,
+        icon: rc(RouteKey.ArticleArchives).icon
       },
       {
         key: rc(RouteKey.ArticleCategories).path,
-        label: rc(RouteKey.ArticleCategories).name
+        label: rc(RouteKey.ArticleCategories).name,
+        icon: rc(RouteKey.ArticleCategories).icon
       },
       {
         key: rc(RouteKey.ArticleTags).path,
-        label: rc(RouteKey.ArticleTags).name
+        label: rc(RouteKey.ArticleTags).name,
+        icon: rc(RouteKey.ArticleTags).icon
       }
     ]
   },

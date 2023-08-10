@@ -5,8 +5,11 @@ import { Title } from '@/enums';
 import { Space, Divider, Avatar } from 'antd';
 import { useTime } from '@/utils/useTime';
 import { Config } from '@/config/constant';
+import { TextTypingEffect } from '@/components/TextTypingEffect';
 const AboutPage: React.FC = () => {
   const { timeText } = useTime();
+  const tip = timeText + ',欢迎访问!';
+  console.log(tip);
   return (
     <PageLayoutComp title={Title.About} rows={10}>
       <div>
@@ -21,7 +24,9 @@ const AboutPage: React.FC = () => {
                 <span>江苏 · 南京</span>
               </Space>
             </div>
-            <div className={styles.info}>{timeText}，欢迎访问！</div>
+            <div className={styles.info}>
+              <TextTypingEffect text={tip} interval={100} />
+            </div>
           </div>
         </div>
         <div className={styles.main}>
@@ -29,9 +34,15 @@ const AboutPage: React.FC = () => {
             🙆‍♂ 关于我
           </Divider>
           <ul>
-            <li>😅 2024届研究生</li>
-            <li>🍉 喜欢前端和机器学习</li>
-            <li>✉️ 2224397297@qq.com</li>
+            <li>
+              <TextTypingEffect text="😅 2024届研究生" interval={50} />
+            </li>
+            <li>
+              <TextTypingEffect text="🍉 喜欢前端和机器学习" interval={50} />
+            </li>
+            <li>
+              <TextTypingEffect text="✉️ 2224397297@qq.com" interval={50} />
+            </li>
           </ul>
           <Divider orientation="left" className={styles.divider}>
             ⚙️ 关于本站
@@ -48,10 +59,21 @@ const AboutPage: React.FC = () => {
           <Divider orientation="left"> 📡 服务端</Divider> */}
 
           <ul>
-            <li>🖥️前后台 : React Hooks+TS+Vite+Antd+Redux/Toolkit</li>
-            <li>🔧服务端 : Node + ORM +Mysql</li>
-            <li>🎉规范化 : Prettier+Eslint+Stylelint+husky+lint-staged+commitlint+commitizen+cz-git</li>
-            <li>🕝计划中 : 有时间再Next+Nest重构 ...</li>
+            <li>
+              <TextTypingEffect text="🖥️前后台 : React Hooks+TS+Vite+Antd+Redux/Toolkit" interval={30} />
+            </li>
+            <li>
+              <TextTypingEffect text="🔧服务端 : Node + ORM +Mysql" interval={30} />
+            </li>
+            <li>
+              <TextTypingEffect
+                text="🎉规范化 : Prettier+Eslint+Stylelint+husky+lint-staged+commitlint+commitizen+cz-git"
+                interval={10}
+              />
+            </li>
+            <li>
+              <TextTypingEffect text="🕝计划中 : 有时间再Next+Nest重构 ..." interval={30} />
+            </li>
           </ul>
         </div>
       </div>

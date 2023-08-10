@@ -8,8 +8,8 @@ interface IHighlightedTextProps {
 
 const HighlightedText: React.FC<IHighlightedTextProps> = ({ title, searchKeyword, color }) => {
   const highlightStyle: React.CSSProperties = {
-    color: color || 'red',
-    textShadow: `0 0 3px ${color || 'red'}`
+    color: color || 'red'
+    // textShadow: `0 0 3px ${color || 'red'}`
   };
 
   if (!searchKeyword) {

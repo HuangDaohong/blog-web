@@ -194,12 +194,13 @@ const AwesomeHeader: React.FC = () => {
               dropdownMatchSelectWidth={250}
             >
               <Input.Search
-                placeholder="全局搜索..."
-                enterButton="搜索"
+                placeholder="全局搜索 ..."
+                // enterButton={<Icon.SearchOutlined />}
+                // suffix={<Icon.SearchOutlined />}
                 allowClear
+                enterButton={false}
                 onSearch={onSearch}
                 ref={inputRef}
-                // disabled
                 // style={{ width: 304 }}
               />
             </AutoComplete>

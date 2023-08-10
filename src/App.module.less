@@ -17,6 +17,13 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   :global {
+    .ant-input-group-addon,
+    .ant-input-search
+      > .ant-input-group
+      > .ant-input-group-addon:last-child
+      .ant-input-search-button:not(.ant-btn-primary) {
+      background-color: transparent !important;
+    }
     ._container_mlv48_1 ._menubox_mlv48_31 ._menu_mlv48_31 {
       background-color: transparent !important;
     }
