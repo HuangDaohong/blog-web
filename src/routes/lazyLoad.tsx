@@ -1,5 +1,6 @@
 import React, { Suspense } from 'react';
-import { Spin } from 'antd';
+// import { Spin } from 'antd';
+import Loading from './Loading';
 
 /**
  * @description 路由懒加载
@@ -10,16 +11,17 @@ const lazyLoad = (Comp: React.LazyExoticComponent<any>): React.ReactNode => {
   return (
     <Suspense
       fallback={
-        <Spin
-          size="large"
-          style={{
-            display: 'flex',
-            // alignItems: 'center',
-            justifyContent: 'center',
-            // height: '100%',
-            marginTop: '20%'
-          }}
-        />
+        // <Spin
+        //   size="large"
+        //   style={{
+        //     display: 'flex',
+        //     // alignItems: 'center',
+        //     justifyContent: 'center',
+        //     // height: '100%',
+        //     marginTop: '20%'
+        //   }}
+        // />
+        <Loading />
       }
     >
       <Comp />

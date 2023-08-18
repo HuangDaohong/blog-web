@@ -353,6 +353,7 @@ interface Props {
   articleID?: number;
   ip?: string;
   city?: string;
+  commentRef?: any;
 }
 const CommentCom: React.FC<Props> = props => {
   const [commentReply, setCommentReply] = useSafeState<string>('');
@@ -439,6 +440,7 @@ const CommentCom: React.FC<Props> = props => {
           required
           bordered={false}
           maxLength={400}
+          ref={props.commentRef}
         />
         <div className={styles.commentEditBottonm}>
           <Emoji addContent={addCommentReply} />

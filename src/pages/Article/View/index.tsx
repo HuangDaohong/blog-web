@@ -1,11 +1,12 @@
 import * as React from 'react';
-import * as mainApi from '@/api';
 import { useNavigate, Link } from 'react-router-dom';
 import { useSafeState, useRequest } from 'ahooks';
 import { Affix, Divider } from 'antd';
+import { useSelector } from 'react-redux';
+import { GetRootState } from '@/redux';
 import { useParams } from 'react-router-dom';
+import dayjs from 'dayjs';
 import MarkNav from 'markdown-navbar';
-import 'markdown-navbar/dist/navbar.css';
 import { Viewer } from '@bytemd/react';
 import gfm from '@bytemd/plugin-gfm';
 import gemoji from '@bytemd/plugin-gemoji';
@@ -13,20 +14,21 @@ import gemoji from '@bytemd/plugin-gemoji';
 import highlight2 from '@bytemd/plugin-highlight-ssr';
 import mediumZoom from '@bytemd/plugin-medium-zoom'; //图片预览
 import mermaid from '@bytemd/plugin-mermaid';
-import { Wrapper } from './styles/markdown';
-import 'bytemd/dist/index.min.css';
-import 'highlight.js/styles/github-dark.css'; // 代码高亮的主题样式(可自选)
-import './styles/custom-container.css';
-import styles from './index.module.less';
 import * as Icon from '@ant-design/icons';
+import * as mainApi from '@/api';
 import { Category, Tag } from '@/types';
-import dayjs from 'dayjs';
 import CommentCom from '@/components/Comment';
 import { useScroll } from '@/utils/useScroll';
-import { useSelector } from 'react-redux';
-import { GetRootState } from '@/redux';
 import { customCodeBlock } from './plugins/codeBlock';
 import { customContainer } from './plugins/customContainer';
+
+import { Wrapper } from './styles/markdown';
+import styles from './index.module.less';
+// import 'juejin-markdown-themes/dist/vuepress.min.css'; // 掘金同款样式
+import 'markdown-navbar/dist/navbar.css';
+import 'highlight.js/styles/github-dark.css'; // 代码高亮的主题样式(可自选)
+import 'bytemd/dist/index.min.css';
+import './styles/custom-container.css';
 
 // 下面这几个表示多少多少天之前，已经封装过另外一个，就暂时不用这个
 // import 'dayjs/locale/zh-cn';
@@ -62,6 +64,7 @@ const ArticleView: React.FC = () => {
   const [like, setLike] = useSafeState<boolean>(false);
   const [articleId, setArticleId] = useSafeState<number>();
 
+  const commentRef = React.useRef<any>(null);
   const { user } = useSelector((state: GetRootState) => state.account);
   console.log(user);
   // 节流模式
@@ -87,6 +90,10 @@ const ArticleView: React.FC = () => {
       await mainApi.articleService.like(id);
     }
     setLike(true);
+  };
+
+  const goToComment = () => {
+    commentRef.current.focus();
   };
 
   React.useEffect(() => {
@@ -186,7 +193,7 @@ const ArticleView: React.FC = () => {
                   </>
                 )}
               </span>
-              <span className={styles.comments}>
+              <span className={styles.comments} onClick={goToComment}>
                 <Icon.CommentOutlined /> {comments}
               </span>
               <span className={styles.views}>
@@ -208,6 +215,7 @@ const ArticleView: React.FC = () => {
           {/* <div className={styles.endplace}>点赞+评论</div> */}
           {articleId ? (
             <CommentCom
+              commentRef={commentRef}
               loading={loading}
               articleID={articleId}
               ip={ipInfo?.ipAddress}
